@@ -9,7 +9,7 @@ pipeline {
   }
 
   tools {
-    jdk 'JDK8_Mac'
+    jdk 'JDK11_Mac'
   }
 
   stages{
@@ -24,7 +24,7 @@ pipeline {
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-	      sh './gradlew clean'
+	     sh './gradlew clean'
         sh './gradlew test'
         sh './gradlew jacocoTestReport'
       }
