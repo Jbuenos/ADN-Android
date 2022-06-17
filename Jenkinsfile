@@ -34,7 +34,7 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-        sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+        sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
       }
     }
@@ -47,7 +47,7 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'app/build/test-results/testDebugUnitTest/*.xml'
+      junit testResults: 'app/build/test-results/**/TEST-*.xml'
     }
     failure {
       echo 'This will run only if failed'
