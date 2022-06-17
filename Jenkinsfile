@@ -18,14 +18,13 @@ pipeline {
       steps {
         echo "------------>Compile<------------"
     	sh './gradlew build -x test'
-
       }
     } 
 
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-	sh './gradlew clean'
+	      sh './gradlew clean'
         sh './gradlew test'
         sh './gradlew jacocoTestReport'
       }
@@ -38,7 +37,7 @@ pipeline {
         sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
         }
       }
-    } 
+    }
   }
 
   post {
@@ -52,7 +51,6 @@ pipeline {
     failure {
       echo 'This will run only if failed'
       mail (to: 'jose.bueno@ceiba.com.co', subject: "Failed Pipeline:${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}")
-        }
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
