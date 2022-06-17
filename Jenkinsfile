@@ -14,10 +14,9 @@ pipeline {
 
   stages{
   
-    stage('Compile') {
+    stage('Build') {
       steps {
         echo "------------>Compile<------------"
-	sh 'chmod +x ./gradlew'
     	sh './gradlew build -x test'
 
       }
@@ -36,7 +35,7 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-        sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+        sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
         }
       }
     } 
@@ -48,11 +47,11 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit 'build/test-results/test/*.xml'
+      junit 'build/test-results/testDebugUnitTest/*.xml'
     }
     failure {
       echo 'This will run only if failed'
-      mail (to: 'jose.bueno@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
+      mail (to: 'jose.bueno@ceiba.com.co', subject: "Failed Pipeline:${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}")
         }
     }
     unstable {
