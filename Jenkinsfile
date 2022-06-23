@@ -24,7 +24,7 @@ pipeline {
     stage('Unit Tests') {
       steps{
         echo "------------>Unit Tests<------------"
-	     sh './gradlew clean'
+	    sh './gradlew clean'
         sh './gradlew test'
         sh './gradlew jacocoTestReport'
       }
@@ -32,7 +32,7 @@ pipeline {
 
     stage('Static Code Analysis') {
       steps{
-        echo '------------>Análisis de código estático<------------'
+        echo '------------>Análisis estático de código<------------'
         withSonarQubeEnv('Sonar') {
         sh "${tool name: 'SonarScanner-Mac', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
@@ -47,7 +47,6 @@ pipeline {
     }
     success {
       echo 'This will run only if successful'
-      junit testResults: 'app/build/test-results/**/TEST-*.xml'
     }
     failure {
       echo 'This will run only if failed'
