@@ -11,5 +11,5 @@ class ParkingEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id_vehicle") val idVehicle: Int,
     @Embedded val carEntity: CarEntity?,
     @Embedded val motorCycleEntity: MotorCycleEntity?,
-    @ColumnInfo(name = "init_date") val date: Date
+    @ColumnInfo(name = "init_date") val date: Long
 )

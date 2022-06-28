@@ -8,7 +8,11 @@ import com.jomibusa.infrastructure.entities.CarEntity
 import com.jomibusa.infrastructure.entities.MotorCycleEntity
 import com.jomibusa.infrastructure.entities.ParkingEntity
 
-@Database(entities = [CarEntity::class, MotorCycleEntity::class, ParkingEntity::class], version = 1)
+@Database(
+    entities = [CarEntity::class, MotorCycleEntity::class, ParkingEntity::class],
+    version = 1,
+    exportSchema = false
+)
 abstract class ParkingDatabase : RoomDatabase() {
 
     companion object {
