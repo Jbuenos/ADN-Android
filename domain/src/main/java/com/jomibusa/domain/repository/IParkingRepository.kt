@@ -1,6 +1,6 @@
 package com.jomibusa.domain.repository
 
-interface ParkingRepository {
+interface IParkingRepository {
 
 
 

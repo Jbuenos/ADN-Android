@@ -1,6 +1,6 @@
 package com.jomibusa.domain.valueObject
 
-interface CostByParking {
+interface ICostByParking {
 
     fun costByDay(): Double
     fun costByHour(): Double
