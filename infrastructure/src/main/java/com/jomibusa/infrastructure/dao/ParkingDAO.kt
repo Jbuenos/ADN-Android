@@ -11,7 +11,7 @@ import com.jomibusa.infrastructure.entities.ParkingEntity
 interface ParkingDAO {
 
     @Query("SELECT * FROM parking_table")
-    suspend fun getAllIVehiclesParking(): List<ParkingEntity>?
+    fun getAllIVehiclesParking(): List<ParkingEntity>?
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertVehicleParking(vararg parking: ParkingEntity)
@@ -20,6 +20,6 @@ interface ParkingDAO {
     fun deleteVehicleParking(vararg numPlate: String): Int
 
     @Query("SELECT * FROM parking_table WHERE num_plate_car = :numPlate or num_plate_motorcycle = :numPlate")
-    fun findVehicleByPlate(vararg numPlate: String): CarEntity?
+    fun findVehicleByPlate(vararg numPlate: String): ParkingEntity?
 
 }

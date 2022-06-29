@@ -10,7 +10,7 @@ import com.jomibusa.infrastructure.entities.CarEntity
 interface CarDAO {
 
     @Query("SELECT * FROM car_table")
-    suspend fun getAllCars(): List<CarEntity>?
+    fun getAllCars(): List<CarEntity?>?
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertCar(vararg car: CarEntity)

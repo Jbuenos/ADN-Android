@@ -11,7 +11,7 @@ import com.jomibusa.infrastructure.entities.MotorCycleEntity
 interface MotorcycleDAO {
 
     @Query("SELECT * FROM motorcycle_table")
-    suspend fun getAllMotorcycle(): List<MotorCycleEntity>?
+    fun getAllMotorcycle(): List<MotorCycleEntity>?
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertMotorcycle(vararg motorcycle: MotorCycleEntity)
@@ -20,6 +20,6 @@ interface MotorcycleDAO {
     fun deleteMotorcycle(vararg numPlate: String): Int
 
     @Query("SELECT * FROM motorcycle_table WHERE num_plate_motorcycle = :numPlate")
-    fun findMotorcycleByPlate(vararg numPlate: String): CarEntity?
+    fun findMotorcycleByPlate(vararg numPlate: String): MotorCycleEntity?
 
 }

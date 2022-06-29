@@ -4,4 +4,4 @@ import com.jomibusa.domain.valueObject.ICostByParking
 import com.jomibusa.domain.valueObject.Plate
 import com.jomibusa.domain.valueObject.TypeVehicle
 
-abstract class Vehicle(val plate: Plate, typeVehicle: TypeVehicle) : ICostByParking
+abstract class Vehicle(val plate: Plate, val typeVehicle: TypeVehicle) : ICostByParking
