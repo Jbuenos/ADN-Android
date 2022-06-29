@@ -17,5 +17,4 @@ interface IParkingRepository {
 
     suspend fun deleteVehicleFromParking(vehicle: Vehicle): Boolean
 
-
 }

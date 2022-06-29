@@ -1,9 +1,16 @@
 package com.jomibusa.domain.entity
 
+import com.jomibusa.domain.exception.EmptyPlateException
 import com.jomibusa.domain.valueObject.Plate
 import com.jomibusa.domain.valueObject.TypeVehicle
 
 data class Car(val numPlate: Plate) : Vehicle(numPlate, TypeVehicle.CAR) {
+
+    init {
+        if(validateEmptyPlate(numPlate.numPlate)) {
+            throw EmptyPlateException()
+        }
+    }
 
     override fun costByDay(): Double = 8000.0
 

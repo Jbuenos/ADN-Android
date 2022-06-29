@@ -1,3 +1,3 @@
 package com.jomibusa.domain.exception
 
-class RangeHourException : Throwable("Rango de horas excedido")
+class RangeHourException : RuntimeException("Rango de horas excedido")

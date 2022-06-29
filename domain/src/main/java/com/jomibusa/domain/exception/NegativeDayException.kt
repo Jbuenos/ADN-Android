@@ -1,3 +1,3 @@
 package com.jomibusa.domain.exception
 
-class NegativeDayException : Throwable("No se permiten días negativos")
+class NegativeDayException : RuntimeException("No se permiten días negativos")

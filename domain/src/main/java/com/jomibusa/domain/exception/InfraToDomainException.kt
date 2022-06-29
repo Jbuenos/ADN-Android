@@ -1,3 +1,3 @@
 package com.jomibusa.domain.exception
 
-class InfraToDomainException : Throwable("Tipo de vehiculo no admitido")
+class InfraToDomainException : RuntimeException("Tipo de vehiculo no admitido")

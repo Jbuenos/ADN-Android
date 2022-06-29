@@ -36,7 +36,7 @@ abstract class ParkingDatabase : RoomDatabase() {
         private fun buildDatabase(context: Context) = Room.databaseBuilder(
             context,
             ParkingDatabase::class.java, "parking.db"
-        ).allowMainThreadQueries().build()
+        ).build()
 
     }
 
