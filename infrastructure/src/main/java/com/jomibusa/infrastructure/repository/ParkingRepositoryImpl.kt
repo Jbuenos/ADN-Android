@@ -13,16 +13,28 @@ class ParkingRepositoryImpl(
     private val parkingTranslatorInfraToDomain: ParkingTranslatorInfraToDomain
 ) : IParkingRepository {
 
-    override suspend fun insertVehicleToParking(parking: Parking): Boolean {
-        TODO("Not yet implemented")
+    override suspend fun insertVehicleToParking(parking: Parking) {
+        val parkingEntity = parkingTranslatorDomainToInfra.parseDomainToEntity(parking)
+        parkingDatabase.parkingDAO.insertVehicleParking(parkingEntity)
     }
 
     override suspend fun findVehicleFromParking(vehicle: Vehicle): Parking? {
-        TODO("Not yet implemented")
+        val parkingEntity = parkingDatabase.parkingDAO.findVehicleByPlate(vehicle.plate.numPlate)
+        val parkingDomain = parkingEntity?.let {
+            parkingTranslatorInfraToDomain.parseInfraToDomain(
+                it
+            )
+        }
+        return parkingDomain
     }
 
     override suspend fun getAllVehiclesFromParking(): List<Parking> {
-        TODO("Not yet implemented")
+        val allVehicleFromParking = parkingDatabase.parkingDAO.getAllIVehiclesParking()
+        var listDomain: List<Parking> = listOf()
+        allVehicleFromParking?.let {
+            listDomain = parkingTranslatorInfraToDomain.parseInfraToDomainList(it)
+        }
+        return listDomain
     }
 
     override suspend fun getNumOfCars(): Int? {

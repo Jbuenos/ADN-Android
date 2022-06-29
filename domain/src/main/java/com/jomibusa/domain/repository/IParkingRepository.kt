@@ -5,7 +5,7 @@ import com.jomibusa.domain.entity.Vehicle
 
 interface IParkingRepository {
 
-    suspend fun insertVehicleToParking(parking: Parking): Boolean
+    suspend fun insertVehicleToParking(parking: Parking)
 
     suspend fun findVehicleFromParking(vehicle: Vehicle): Parking?
 

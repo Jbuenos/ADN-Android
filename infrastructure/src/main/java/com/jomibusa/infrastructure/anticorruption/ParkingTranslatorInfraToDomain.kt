@@ -10,7 +10,7 @@ import java.util.*
 
 class ParkingTranslatorInfraToDomain {
 
-    fun convertToDomain(parkingEntity: ParkingEntity): Parking {
+    fun parseInfraToDomain(parkingEntity: ParkingEntity): Parking {
 
         val vehicleEntity = if (parkingEntity.carEntity != null) {
             Car(Plate(parkingEntity.carEntity.numPlate))
@@ -24,6 +24,17 @@ class ParkingTranslatorInfraToDomain {
         }
 
         return Parking(vehicleEntity, Date(parkingEntity.date))
+    }
+
+    fun parseInfraToDomainList(listParkingEntity: List<ParkingEntity>): List<Parking> {
+        val listDomain: MutableList<Parking> = mutableListOf()
+
+        for (parkingEntity in listParkingEntity) {
+            val item = parseInfraToDomain(parkingEntity)
+            listDomain.add(item)
+        }
+
+        return listDomain
     }
 
 }

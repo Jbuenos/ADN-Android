@@ -9,7 +9,7 @@ import com.jomibusa.infrastructure.entities.ParkingEntity
 
 class ParkingTranslatorDomainToInfra {
 
-    fun convertToEntity(parking: Parking): ParkingEntity {
+    fun parseDomainToEntity(parking: Parking): ParkingEntity {
 
        return if(parking.vehicle.typeVehicle == TypeVehicle.CAR) {
            ParkingEntity(
