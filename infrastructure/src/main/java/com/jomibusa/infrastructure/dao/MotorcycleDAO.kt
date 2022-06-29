@@ -17,7 +17,7 @@ interface MotorcycleDAO {
     fun insertMotorcycle(vararg motorcycle: MotorCycleEntity)
 
     @Query("DELETE FROM motorcycle_table WHERE num_plate_motorcycle = :numPlate")
-    fun deleteMotorcycle(vararg numPlate: String)
+    fun deleteMotorcycle(vararg numPlate: String): Int
 
     @Query("SELECT * FROM motorcycle_table WHERE num_plate_motorcycle = :numPlate")
     fun findMotorcycleByPlate(vararg numPlate: String): CarEntity?

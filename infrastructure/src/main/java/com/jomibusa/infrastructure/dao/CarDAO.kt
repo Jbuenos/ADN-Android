@@ -16,7 +16,7 @@ interface CarDAO {
     fun insertCar(vararg car: CarEntity)
 
     @Query("DELETE FROM car_table WHERE num_plate_car = :numPlate")
-    fun deleteCar(vararg numPlate: String)
+    fun deleteCar(vararg numPlate: String): Int
 
     @Query("SELECT * FROM car_table WHERE num_plate_car = :numPlate")
     fun findCarByPlate(vararg numPlate: String): CarEntity?

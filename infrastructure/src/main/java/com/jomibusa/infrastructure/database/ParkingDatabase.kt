@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.jomibusa.infrastructure.dao.CarDAO
+import com.jomibusa.infrastructure.dao.MotorcycleDAO
+import com.jomibusa.infrastructure.dao.ParkingDAO
 import com.jomibusa.infrastructure.entities.CarEntity
 import com.jomibusa.infrastructure.entities.MotorCycleEntity
 import com.jomibusa.infrastructure.entities.ParkingEntity
@@ -14,6 +17,10 @@ import com.jomibusa.infrastructure.entities.ParkingEntity
     exportSchema = false
 )
 abstract class ParkingDatabase : RoomDatabase() {
+
+    abstract val carDAO: CarDAO
+    abstract val motorcycleDAO: MotorcycleDAO
+    abstract val parkingDAO: ParkingDAO
 
     companion object {
 

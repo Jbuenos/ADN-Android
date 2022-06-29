@@ -17,7 +17,7 @@ interface ParkingDAO {
     fun insertVehicleParking(vararg parking: ParkingEntity)
 
     @Query("DELETE FROM parking_table WHERE num_plate_car = :numPlate or num_plate_motorcycle = :numPlate")
-    fun deleteVehicleParking(vararg numPlate: String)
+    fun deleteVehicleParking(vararg numPlate: String): Int
 
     @Query("SELECT * FROM parking_table WHERE num_plate_car = :numPlate or num_plate_motorcycle = :numPlate")
     fun findVehicleByPlate(vararg numPlate: String): CarEntity?
