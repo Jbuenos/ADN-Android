@@ -11,7 +11,7 @@ class VehicleService(private val repository: VehicleRepository) {
     }
 
     suspend fun getVehicleByPlate(plate: Plate): Vehicle? {
-        return repository.getVehicleByPlate(plate)
+        return repository.findVehicleByPlate(plate)
     }
 
 }

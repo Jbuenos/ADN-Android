@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jomibusa.infrastructure.dao.CarDAO
-import com.jomibusa.infrastructure.dao.MotorcycleDAO
-import com.jomibusa.infrastructure.dao.ParkingDAO
-import com.jomibusa.infrastructure.entities.CarEntity
-import com.jomibusa.infrastructure.entities.MotorcycleEntity
-import com.jomibusa.infrastructure.entities.ParkingEntity
+import com.jomibusa.infrastructure.vehicle.dao.CarDAO
+import com.jomibusa.infrastructure.vehicle.dao.MotorcycleDAO
+import com.jomibusa.infrastructure.vehicle.dao.ParkingDAO
+import com.jomibusa.infrastructure.vehicle.entities.CarEntity
+import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
+import com.jomibusa.infrastructure.vehicle.entities.ParkingEntity
 
 @Database(
     entities = [CarEntity::class, MotorcycleEntity::class, ParkingEntity::class],

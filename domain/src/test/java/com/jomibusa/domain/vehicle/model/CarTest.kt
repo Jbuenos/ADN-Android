@@ -88,4 +88,21 @@ class CarTest {
         }
     }
 
+    @Test
+    fun car_createCarWithBadPatterSpecialCharacter_exception() {
+
+        //Arrange
+        val plate = Plate("#bc*$")
+        val expectedMessage = "Placa no cumple con el patrón requerido"
+
+        //Act
+        try {
+            val car = Car(plate)
+            Assert.fail()
+        } catch (ex: Exception) {
+            //Assert
+            assertEquals(expectedMessage, ex.message)
+        }
+    }
+
 }

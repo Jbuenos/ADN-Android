@@ -1,11 +1,11 @@
-package com.jomibusa.infrastructure.anticorruption
+package com.jomibusa.infrastructure.vehicle.anticorruption
 
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
-import com.jomibusa.infrastructure.entities.CarEntity
-import com.jomibusa.infrastructure.entities.MotorcycleEntity
-import com.jomibusa.infrastructure.entities.ParkingEntity
+import com.jomibusa.infrastructure.vehicle.entities.CarEntity
+import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
+import com.jomibusa.infrastructure.vehicle.entities.ParkingEntity
 
 class ParkingTranslatorDomainToInfra {
 

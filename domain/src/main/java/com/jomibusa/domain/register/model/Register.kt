@@ -23,7 +23,7 @@ abstract class Register(val vehicle: Vehicle, val initDate: Date) {
 
     private fun isDayRestriction(date: Date): Boolean {
         val localDateTime = convertDateToLocalDateTime(date)
-        return localDateTime.dayOfWeek != DayOfWeek.MONDAY || localDateTime.dayOfWeek != DayOfWeek.SUNDAY
+        return localDateTime.dayOfWeek == DayOfWeek.MONDAY || localDateTime.dayOfWeek == DayOfWeek.SUNDAY
     }
 
     private fun convertDateToLocalDateTime(dateToConvert: Date): LocalDateTime {

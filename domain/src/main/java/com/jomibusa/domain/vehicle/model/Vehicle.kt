@@ -21,7 +21,7 @@ abstract class Vehicle(val plate: Plate) {
     }
 
     private fun validatePlateRegex(numPlate: String): Boolean {
-        val patterRegexPlate = "[a-zA-Z]{3}[0-9]{2}[a-zA-Z0-9]"
+        val patterRegexPlate = "^[a-zA-Z]{3}[0-9]{2}[a-zA-Z0-9]\$"
         return Pattern.matches(patterRegexPlate, plate.numPlate)
     }
 

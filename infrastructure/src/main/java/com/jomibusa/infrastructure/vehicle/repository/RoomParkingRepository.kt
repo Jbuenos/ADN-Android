@@ -1,11 +1,10 @@
-package com.jomibusa.infrastructure.repository
+package com.jomibusa.infrastructure.vehicle.repository
 
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.register.repository.RegisterRepository
 import com.jomibusa.domain.vehicle.model.Plate
-import com.jomibusa.domain.vehicle.model.Vehicle
-import com.jomibusa.infrastructure.anticorruption.ParkingTranslatorDomainToInfra
-import com.jomibusa.infrastructure.anticorruption.ParkingTranslatorInfraToDomain
+import com.jomibusa.infrastructure.vehicle.anticorruption.ParkingTranslatorDomainToInfra
+import com.jomibusa.infrastructure.vehicle.anticorruption.ParkingTranslatorInfraToDomain
 import com.jomibusa.infrastructure.database.ParkingDatabase
 
 class RoomParkingRepository(
@@ -40,9 +39,9 @@ class RoomParkingRepository(
         return listDomain
     }
 
-    override suspend fun deleteRegisterByPlate(plate: Plate): Boolean {
+    /*override suspend fun deleteRegisterByPlate(plate: Plate): Boolean {
         return parkingDatabase.parkingDAO.deleteVehicleParking(plate.numPlate) != -1
-    }
+    }*/
 
     /*override suspend fun getNumOfCars(): Int? {
         return parkingDatabase.carDAO.getAllCars()?.size

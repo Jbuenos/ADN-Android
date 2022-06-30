@@ -106,4 +106,21 @@ class MotorcycleTest {
         }
     }
 
+    @Test
+    fun motorcycle_createMotorcycleWithBadPatterSpecialCharacter_exception() {
+
+        //Arrange
+        val plate = Plate("#bc*$")
+        val expectedMessage = "Placa no cumple con el patrón requerido"
+
+        //Act
+        try {
+            val motorcycle = Motorcycle(250, plate)
+            Assert.fail()
+        } catch (ex: Exception) {
+            //Assert
+            assertEquals(expectedMessage, ex.message)
+        }
+    }
+
 }

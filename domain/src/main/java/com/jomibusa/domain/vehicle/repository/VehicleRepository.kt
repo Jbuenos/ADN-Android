@@ -7,6 +7,6 @@ interface VehicleRepository {
 
     suspend fun getAllVehicles(): List<Vehicle>?
 
-    suspend fun getVehicleByPlate(plate: Plate): Vehicle?
+    suspend fun findVehicleByPlate(plate: Plate): Vehicle?
 
 }
