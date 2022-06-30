@@ -55,4 +55,55 @@ class MotorcycleTest {
         }
     }
 
+    @Test
+    fun car_createMotorcycleWithBadPatterNumber_exception() {
+
+        //Arrange
+        val plate = Plate("123456")
+        val expectedMessage = "Placa no cumple con el patrón requerido"
+
+        //Act
+        try {
+            val car = Motorcycle(350, plate)
+            Assert.fail()
+        } catch (ex: Exception) {
+            //Assert
+            assertEquals(expectedMessage, ex.message)
+        }
+    }
+
+    @Test
+    fun car_createMotorcycleWithBadPatterLetters_exception() {
+
+        //Arrange
+        val plate = Plate("abcdef")
+        val expectedMessage = "Placa no cumple con el patrón requerido"
+
+        //Act
+        try {
+            val car = Motorcycle(250, plate)
+            Assert.fail()
+        } catch (ex: Exception) {
+            //Assert
+            assertEquals(expectedMessage, ex.message)
+        }
+    }
+
+    @Test
+    fun car_createMotorcycleWithBadPatterNumberAndLetters_exception() {
+
+        //Arrange
+        val plate = Plate("a3419c")
+        val expectedMessage = "Placa no cumple con el patrón requerido"
+
+        //Act
+        try {
+            val car = Motorcycle(300, plate)
+            Assert.fail()
+        } catch (ex: Exception) {
+            //Assert
+            assertEquals(expectedMessage, ex.message)
+        }
+    }
+
 }
