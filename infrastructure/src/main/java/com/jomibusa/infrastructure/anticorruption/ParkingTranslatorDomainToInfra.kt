@@ -1,28 +1,34 @@
 package com.jomibusa.infrastructure.anticorruption
 
-import com.jomibusa.domain.aggregate.Parking
-import com.jomibusa.domain.entity.MotorCycle
-import com.jomibusa.domain.valueObject.TypeVehicle
+import com.jomibusa.domain.register.model.Register
+import com.jomibusa.domain.vehicle.model.Car
+import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.infrastructure.entities.CarEntity
-import com.jomibusa.infrastructure.entities.MotorCycleEntity
+import com.jomibusa.infrastructure.entities.MotorcycleEntity
 import com.jomibusa.infrastructure.entities.ParkingEntity
 
 class ParkingTranslatorDomainToInfra {
 
-    fun parseDomainToEntity(parking: Parking): ParkingEntity {
+    fun parseDomainToEntity(register: Register): ParkingEntity? {
 
-       return if(parking.vehicle.typeVehicle == TypeVehicle.CAR) {
-           ParkingEntity(
-               carEntity = CarEntity(parking.vehicle.plate.numPlate),
-               date = parking.date.time)
-       } else {
-           ParkingEntity(
-               motorCycleEntity = MotorCycleEntity(
-                   parking.vehicle.plate.numPlate,
-                   (parking.vehicle as MotorCycle).cylinderCapacity
-               ),
-               date = parking.date.time)
-       }
+        return when (register.vehicle) {
+            is Car -> {
+                ParkingEntity(
+                    carEntity = CarEntity(register.vehicle.plate.numPlate),
+                    date = register.initDate.time
+                )
+            }
+            is Motorcycle -> {
+                ParkingEntity(
+                    motorcycleEntity = MotorcycleEntity(
+                        register.vehicle.plate.numPlate,
+                        (register.vehicle as Motorcycle).cylinderCapacity
+                    ),
+                    date = register.initDate.time
+                )
+            }
+            else -> null
+        }
     }
 
 }

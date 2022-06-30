@@ -8,11 +8,11 @@ import com.jomibusa.infrastructure.dao.CarDAO
 import com.jomibusa.infrastructure.dao.MotorcycleDAO
 import com.jomibusa.infrastructure.dao.ParkingDAO
 import com.jomibusa.infrastructure.entities.CarEntity
-import com.jomibusa.infrastructure.entities.MotorCycleEntity
+import com.jomibusa.infrastructure.entities.MotorcycleEntity
 import com.jomibusa.infrastructure.entities.ParkingEntity
 
 @Database(
-    entities = [CarEntity::class, MotorCycleEntity::class, ParkingEntity::class],
+    entities = [CarEntity::class, MotorcycleEntity::class, ParkingEntity::class],
     version = 1,
     exportSchema = false
 )
