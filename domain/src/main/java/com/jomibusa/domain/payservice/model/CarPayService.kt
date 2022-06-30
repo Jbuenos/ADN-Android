@@ -1,8 +1,8 @@
-package com.jomibusa.domain.payment.model
+package com.jomibusa.domain.payservice.model
 
 import com.jomibusa.domain.register.model.Register
 
-class CarPayment(register: Register) : Payment(register) {
+class CarPayService(register: Register) : PayService(register) {
 
     override val costByDay: Double
         get() = 8000.0

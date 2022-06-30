@@ -11,7 +11,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class VehicleServiceTest {
+class VehiclePayServiceTest {
 
     @Test
     fun getAllVehicles_emptyList_success() = runTest {

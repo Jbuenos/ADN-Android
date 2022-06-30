@@ -1,9 +1,9 @@
-package com.jomibusa.domain.payment.model
+package com.jomibusa.domain.payservice.model
 
 import com.jomibusa.domain.register.model.Register
 import java.util.*
 
-abstract class Payment(val register: Register) {
+abstract class PayService(val register: Register) {
 
     abstract val costByDay: Double
     abstract val costByHour: Double

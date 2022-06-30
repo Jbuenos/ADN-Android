@@ -12,7 +12,7 @@ abstract class Register(val vehicle: Vehicle, val initDate: Date) {
     abstract val capacityParking: Int
 
     init {
-        if (isPlateStartWhitA(vehicle) && isDayRestriction(initDate) && isDayRestriction(initDate)) {
+        if (isPlateStartWhitA(vehicle) && isDayRestriction(initDate)) {
             throw FirstLetterOrDayConditionException()
         }
     }
@@ -22,11 +22,11 @@ abstract class Register(val vehicle: Vehicle, val initDate: Date) {
     }
 
     private fun isDayRestriction(date: Date): Boolean {
-        val localDateTime = convertToLocalDateTime(date)
+        val localDateTime = convertDateToLocalDateTime(date)
         return localDateTime.dayOfWeek != DayOfWeek.MONDAY || localDateTime.dayOfWeek != DayOfWeek.SUNDAY
     }
 
-    private fun convertToLocalDateTime(dateToConvert: Date): LocalDateTime {
+    private fun convertDateToLocalDateTime(dateToConvert: Date): LocalDateTime {
         return LocalDateTime.ofInstant(
             dateToConvert.toInstant(), ZoneId.systemDefault()
         )
