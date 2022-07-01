@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'jacoco'
 }
 
 android {
@@ -19,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            testCoverageEnabled true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -26,6 +30,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            unitTests.returnDefaultValues = true
+        }
     }
 }
 
@@ -41,4 +51,38 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.3'
     testImplementation 'org.mockito:mockito-core:3.3.3'
 
+}
+
+task jacocoTestReport(type: JacocoReport,
+        dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+    def myModule = project(':domain')
+    layout.files("$buildDir/tmp/kotlin-classes/debug")
+    def dotClassesFiles = layout.files("$buildDir/tmp/kotlin-classes/debug", "$myModule.buildDir/tmp/kotlin-classes/debug")
+    def mainSources = layout.files("$project.projectDir/src/main/java", "$myModule.projectDir/src/main/java")
+    def executionFilesForInstrumentationTest = fileTree(
+            dir: "$buildDir",
+            includes: ["outputs/code_coverage/debugAndroidTest/connected/**/coverage.ec"]
+    )
+
+    def executionFileForNonInstrumentationInModule = "$buildDir/outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+    def executionFiles = layout.files(
+            executionFilesForInstrumentationTest,
+            executionFileForNonInstrumentationInModule
+    )
+
+    sourceDirectories.setFrom(files([mainSources]))
+    classDirectories.setFrom(files([dotClassesFiles.asFileTree]))
+    executionData.setFrom(executionFiles.asFileTree)
+
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
 }

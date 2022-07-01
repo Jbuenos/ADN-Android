@@ -39,9 +39,9 @@ class RoomParkingRepository(
         return listDomain
     }
 
-    /*override suspend fun deleteRegisterByPlate(plate: Plate): Boolean {
-        return parkingDatabase.parkingDAO.deleteVehicleParking(plate.numPlate) != -1
-    }*/
+    override suspend fun deleteRegisterByPlate(plate: Plate): Int {
+        return parkingDatabase.parkingDAO.deleteVehicleParking(plate.numPlate)
+    }
 
     /*override suspend fun getNumOfCars(): Int? {
         return parkingDatabase.carDAO.getAllCars()?.size

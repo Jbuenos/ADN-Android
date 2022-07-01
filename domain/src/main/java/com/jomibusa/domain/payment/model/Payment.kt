@@ -1,14 +1,14 @@
-package com.jomibusa.domain.payservice.model
+package com.jomibusa.domain.payment.model
 
 import com.jomibusa.domain.register.model.Register
 import java.util.*
 
-abstract class PayService(val register: Register) {
+abstract class Payment(val register: Register) {
 
     abstract val costByDay: Double
     abstract val costByHour: Double
 
-    open fun validateTotalService(): Double {
+    open fun calculateTotalService(): Double {
         val totalTimeToPay = getHoursAndDaysToPay()
         val totalServiceDay = costByDay * totalTimeToPay.second
         val totalServiceHour = costByHour * totalTimeToPay.first

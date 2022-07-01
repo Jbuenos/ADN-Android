@@ -15,7 +15,7 @@ import org.mockito.Mockito
 import java.util.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class RegisterServiceTest {
+class MotorcycleRegisterServiceTest {
 
     @Test
     fun register_validateMaxSpacesCar_exception() = runTest {
