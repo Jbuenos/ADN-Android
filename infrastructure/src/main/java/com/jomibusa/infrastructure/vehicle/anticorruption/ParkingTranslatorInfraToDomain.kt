@@ -1,11 +1,11 @@
 package com.jomibusa.infrastructure.vehicle.anticorruption
 
 import com.jomibusa.domain.register.model.Register
-import com.jomibusa.infrastructure.vehicle.entities.ParkingEntity
+import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 
 class ParkingTranslatorInfraToDomain {
 
-    fun parseInfraToDomain(parkingEntity: ParkingEntity): Register? {
+    fun parseInfraToDomain(parkingEntity: ParkingRegisterEntity): Register? {
 
         /*val vehicleEntity = if (parkingEntity.carEntity != null) {
             CarRegister(Plate(parkingEntity.carEntity.numPlate))
@@ -21,7 +21,7 @@ class ParkingTranslatorInfraToDomain {
         return null
     }
 
-    fun parseInfraToDomainList(listParkingEntity: List<ParkingEntity>): List<Register> {
+    fun parseInfraToDomainList(listParkingEntity: List<ParkingRegisterEntity>): List<Register> {
         val listDomain: MutableList<Register> = mutableListOf()
 
         for (parkingEntity in listParkingEntity) {

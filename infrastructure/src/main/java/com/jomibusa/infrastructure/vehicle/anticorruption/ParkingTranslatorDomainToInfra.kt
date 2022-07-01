@@ -1,17 +1,13 @@
 package com.jomibusa.infrastructure.vehicle.anticorruption
 
 import com.jomibusa.domain.register.model.Register
-import com.jomibusa.domain.vehicle.model.Car
-import com.jomibusa.domain.vehicle.model.Motorcycle
-import com.jomibusa.infrastructure.vehicle.entities.CarEntity
-import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
-import com.jomibusa.infrastructure.vehicle.entities.ParkingEntity
+import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 
 class ParkingTranslatorDomainToInfra {
 
-    fun parseDomainToEntity(register: Register): ParkingEntity? {
+    fun parseDomainToEntity(register: Register): ParkingRegisterEntity? {
 
-        return when (register.vehicle) {
+        /*return when (register.vehicle) {
             is Car -> {
                 ParkingEntity(
                     carEntity = CarEntity(register.vehicle.plate.numPlate),
@@ -28,7 +24,8 @@ class ParkingTranslatorDomainToInfra {
                 )
             }
             else -> null
-        }
+        }*/
+        TODO()
     }
 
 }

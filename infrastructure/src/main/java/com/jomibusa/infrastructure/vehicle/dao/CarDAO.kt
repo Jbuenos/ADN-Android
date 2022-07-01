@@ -1,9 +1,6 @@
 package com.jomibusa.infrastructure.vehicle.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 
 @Dao
@@ -15,10 +12,10 @@ interface CarDAO {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertCar(vararg car: CarEntity)
 
-    @Query("DELETE FROM car WHERE num_plate_car = :numPlate")
-    fun deleteCar(vararg numPlate: String): Int
+    @Delete
+    fun deleteCar(carEntity: CarEntity): Int
 
-    @Query("SELECT * FROM car WHERE num_plate_car = :numPlate")
+    @Query("SELECT * FROM car WHERE numPlate = :numPlate")
     fun findCarByPlate(vararg numPlate: String): CarEntity?
 
 }

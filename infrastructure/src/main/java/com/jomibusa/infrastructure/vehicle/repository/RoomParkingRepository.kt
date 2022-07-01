@@ -5,7 +5,7 @@ import com.jomibusa.domain.register.repository.RegisterRepository
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.vehicle.anticorruption.ParkingTranslatorDomainToInfra
 import com.jomibusa.infrastructure.vehicle.anticorruption.ParkingTranslatorInfraToDomain
-import com.jomibusa.infrastructure.database.ParkingDatabase
+import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 
 class RoomParkingRepository(
     private val parkingDatabase: ParkingDatabase,
@@ -21,13 +21,14 @@ class RoomParkingRepository(
     }
 
     override suspend fun findRegisterByPlate(plate: Plate): Register? {
-        val parkingEntity = parkingDatabase.parkingDAO.findVehicleByPlate(plate.numPlate)
+        TODO()
+        /*val parkingEntity = parkingDatabase.parkingDAO.findVehicleByPlate(plate.numPlate)
         val parkingDomain = parkingEntity?.let {
             parkingTranslatorInfraToDomain.parseInfraToDomain(
                 it
             )
         }
-        return parkingDomain
+        return parkingDomain*/
     }
 
     override suspend fun getAllRegister(): List<Register> {
@@ -40,7 +41,8 @@ class RoomParkingRepository(
     }
 
     override suspend fun deleteRegisterByPlate(plate: Plate): Int {
-        return parkingDatabase.parkingDAO.deleteVehicleParking(plate.numPlate)
+        TODO()
+        //return parkingDatabase.parkingDAO.deleteVehicleParking(plate.numPlate)
     }
 
     /*override suspend fun getNumOfCars(): Int? {
