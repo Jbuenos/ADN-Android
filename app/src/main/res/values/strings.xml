@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Parking Attendant</string>
+    <string name="text_parking_register">Registrar</string>
+    <string name="text_parking_payment">Pagar</string>
+    <string name="text_parking_title">Parking</string>
+    <string name="text_register_vehicle">Registrar vehículo</string>
+    <string name="text_register_car">Carro</string>
+    <string name="text_register_motorcycle">Motocicleta</string>
+    <string name="text_register_hint_plate">Placa</string>
+    <string name="text_payment_title">Realizar pago</string>
+    <string name="text_payment_button">Calcular pago</string>
+    <string name="text_payment_total_payment">Total a pagar:</string>
 </resources>
