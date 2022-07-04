@@ -20,7 +20,7 @@ abstract class ParkingDatabase : RoomDatabase() {
 
     abstract val carDAO: CarDAO
     abstract val motorcycleDAO: MotorcycleDAO
-    abstract val parkingDAO: ParkingRegisterDAO
+    abstract val parkingRegisterDAO: ParkingRegisterDAO
 
     companion object {
 

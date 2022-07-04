@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "register")
 class ParkingRegisterEntity(
-    @PrimaryKey(autoGenerate = true) val idParkingRegister: Long,
+    @PrimaryKey(autoGenerate = true) val idParkingRegister: Long?= null,
     val idPlateVehicle: String,
     val initDate: Long
 )

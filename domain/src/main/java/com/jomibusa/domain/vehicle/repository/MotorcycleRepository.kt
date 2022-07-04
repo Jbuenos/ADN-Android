@@ -1,3 +1,9 @@
 package com.jomibusa.domain.vehicle.repository
 
-interface MotorcycleRepository : VehicleRepository
+import com.jomibusa.domain.vehicle.model.Motorcycle
+
+interface MotorcycleRepository : VehicleRepository {
+
+    suspend fun getAllMotorcycles(): List<Motorcycle>
+
+}
