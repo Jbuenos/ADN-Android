@@ -15,4 +15,7 @@ interface ParkingRegisterDAO {
     @Delete
     fun deleteParkingRegister(vararg parkingRegisterEntity: ParkingRegisterEntity): Int
 
+    @Query("SELECT * FROM register WHERE idPlateVehicle = :numPlate")
+    fun findRegisterByPlate(vararg numPlate: String): ParkingRegisterEntity?
+
 }

@@ -7,10 +7,6 @@ interface RegisterRepository {
 
     suspend fun insertRegister(register: Register)
 
-    suspend fun findRegisterByPlate(plate: Plate): Register?
-
-    suspend fun getAllRegister(): List<Register>?
-
-    suspend fun deleteRegisterByPlate(plate: Plate): Int
+    suspend fun deleteRegisterByPlate(register: Register): Int
 
 }

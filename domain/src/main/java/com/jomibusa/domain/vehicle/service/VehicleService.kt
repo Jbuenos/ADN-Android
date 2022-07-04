@@ -1,6 +1,7 @@
 package com.jomibusa.domain.vehicle.service
 
 import com.jomibusa.domain.register.model.Register
+import com.jomibusa.domain.vehicle.exception.VehicleAlreadyExistException
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Vehicle
@@ -11,6 +12,14 @@ import com.jomibusa.domain.vehicle.repository.VehicleRepository
 class VehicleService(
     private val vehicleRepository: VehicleRepository
 ) {
+
+    suspend fun insertVehicle(register: Register) {
+        if (vehicleRepository.findVehicleByPlate(register)?.equals(register.vehicle) == true) {
+            throw VehicleAlreadyExistException()
+        } else {
+            vehicleRepository.insertVehicle(register)
+        }
+    }
 
     suspend fun getAllCars(): List<Car> = (vehicleRepository as CarRepository).getAllCars()
 
@@ -28,5 +37,8 @@ class VehicleService(
             else -> null
         }
     }
+
+    suspend fun deleteVehicle(register: Register): Int =
+        vehicleRepository.deleteVehicle(register.vehicle)
 
 }
