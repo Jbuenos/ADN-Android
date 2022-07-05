@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.databinding.FragmentParkingBinding
 
 class ParkingFragment : Fragment() {
@@ -18,6 +19,17 @@ class ParkingFragment : Fragment() {
     ): View {
         _binding = FragmentParkingBinding.inflate(inflater, container, false)
 
+        binding.apply {
+
+            materialButtonRegister.setOnClickListener {
+                findNavController().navigate(ParkingFragmentDirections.actionParkingFragmentToRegisterFragment())
+            }
+
+            materialButtonPayment.setOnClickListener {
+                findNavController().navigate(ParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
+            }
+
+        }
 
         return binding.root
     }

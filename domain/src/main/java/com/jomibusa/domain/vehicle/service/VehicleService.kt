@@ -27,7 +27,8 @@ class VehicleService(
         (vehicleRepository as MotorcycleRepository).getAllMotorcycles()
 
     suspend fun getVehicleByPlate(register: Register): Vehicle? {
-        return when (register.vehicle) {
+        return vehicleRepository.findVehicleByPlate(register)
+        /*return when (register.vehicle) {
             is Car -> {
                 (vehicleRepository as CarRepository).findVehicleByPlate(register)
             }
@@ -35,7 +36,7 @@ class VehicleService(
                 (vehicleRepository as MotorcycleRepository).findVehicleByPlate(register)
             }
             else -> null
-        }
+        }*/
     }
 
     suspend fun deleteVehicle(register: Register): Int =
