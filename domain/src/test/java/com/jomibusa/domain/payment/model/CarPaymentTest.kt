@@ -26,7 +26,7 @@ class CarPaymentTest {
     @Test
     fun carPayment_calculateTotalServiceWithInformation_calculate() {
 
-        /*//Arrange
+        //Arrange
         val register = CarRegister(Car(Plate("JRP310")), Date(1656943200))
         val carPayment = CarPayment(register)
 
@@ -34,7 +34,7 @@ class CarPaymentTest {
         val totalService = carPayment.calculateTotalService()
 
         //Assert
-        Assert.assertEquals(5000, totalService.toInt())*/
+        Assert.assertEquals(5000, totalService.toInt())
 
     }
 

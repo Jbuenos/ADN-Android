@@ -10,4 +10,5 @@
     <string name="text_payment_title">Realizar pago</string>
     <string name="text_payment_button">Calcular pago</string>
     <string name="text_payment_total_payment">Total a pagar:</string>
+    <string name="text_register_motorcycle_cylinder_capacity">Cilindraje</string>
 </resources>

@@ -1,8 +1,8 @@
 package com.jomibusa.domain.vehicle.model
 
-import org.junit.Assert
-import org.junit.Assert.assertEquals
+import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class CarTest {
@@ -25,15 +25,11 @@ class CarTest {
 
         //Arrange
         val plate = Plate("")
-        val expectedMessage = "La Placa del vehiculo está en blanco"
 
         //Act
-        try {
-            val car = Car(plate)
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(InvalidPatternPlateException::class.java) {
+            Car(plate)
         }
     }
 
@@ -42,15 +38,11 @@ class CarTest {
 
         //Arrange
         val plate = Plate("123456")
-        val expectedMessage = "Placa no cumple con el patrón requerido"
 
         //Act
-        try {
-            val car = Car(plate)
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(InvalidPatternPlateException::class.java) {
+            Car(plate)
         }
     }
 
@@ -59,15 +51,11 @@ class CarTest {
 
         //Arrange
         val plate = Plate("abcdef")
-        val expectedMessage = "Placa no cumple con el patrón requerido"
 
         //Act
-        try {
-            val car = Car(plate)
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(InvalidPatternPlateException::class.java) {
+            Car(plate)
         }
     }
 
@@ -76,15 +64,11 @@ class CarTest {
 
         //Arrange
         val plate = Plate("a3419c")
-        val expectedMessage = "Placa no cumple con el patrón requerido"
 
         //Act
-        try {
-            val car = Car(plate)
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(InvalidPatternPlateException::class.java) {
+            Car(plate)
         }
     }
 
@@ -93,15 +77,11 @@ class CarTest {
 
         //Arrange
         val plate = Plate("#bc*$")
-        val expectedMessage = "Placa no cumple con el patrón requerido"
 
         //Act
-        try {
-            val car = Car(plate)
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(InvalidPatternPlateException::class.java) {
+            Car(plate)
         }
     }
 

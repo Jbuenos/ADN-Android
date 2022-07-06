@@ -41,14 +41,14 @@
         app:layout_constraintTop_toBottomOf="@id/image_view_parking">
 
         <RadioButton
-            android:id="@+id/radio_pirates"
+            android:id="@+id/radio_button_car"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/text_register_car" />
 
         <RadioButton
-            android:id="@+id/radio_ninjas"
+            android:id="@+id/radio_button_motorcycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -73,11 +73,45 @@
         app:layout_constraintTop_toBottomOf="@id/radio_group_vehicles">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_input_edit_text_search"
+            android:id="@+id/text_input_edit_text_plate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
             android:imeOptions="actionDone"
             android:inputType="text"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout_cylinder_capacity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/text_register_motorcycle_cylinder_capacity"
+        android:textColorHint="@color/secondary_gray"
+        android:visibility="gone"
+        app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/purple_700"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_plate"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_edit_text_cylinder_capacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLength="6"
             android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -95,6 +129,6 @@
         app:backgroundTint="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_input_layout_plate" />
+        app:layout_constraintTop_toBottomOf="@id/text_input_layout_cylinder_capacity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

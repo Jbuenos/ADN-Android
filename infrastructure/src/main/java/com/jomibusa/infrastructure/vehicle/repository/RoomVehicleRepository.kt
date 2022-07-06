@@ -3,9 +3,9 @@ package com.jomibusa.infrastructure.vehicle.repository
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
+import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.domain.vehicle.model.Vehicle
-import com.jomibusa.domain.vehicle.repository.CarRepository
-import com.jomibusa.domain.vehicle.repository.MotorcycleRepository
+import com.jomibusa.domain.vehicle.repository.VehicleRepository
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorInfraToDomain
@@ -14,9 +14,9 @@ class RoomVehicleRepository(
     private val parkingDatabase: ParkingDatabase,
     private val vehicleTranslatorDomainToInfra: VehicleTranslatorDomainToInfra,
     private val vehicleTranslatorInfraToDomain: VehicleTranslatorInfraToDomain
-) : CarRepository, MotorcycleRepository {
+) : VehicleRepository {
 
-    override suspend fun insertVehicle(register: Register) {
+    /*override suspend fun insertVehicle(register: Register) {
 
         when (register.vehicle) {
             is Car -> {
@@ -85,6 +85,13 @@ class RoomVehicleRepository(
 
             else -> null
         }
+    }*/
+
+    override suspend fun getAllVehicles(): List<Vehicle> {
+        TODO("Not yet implemented")
     }
 
+    override suspend fun findVehicleByPlate(plate: Plate): Vehicle? {
+        TODO("Not yet implemented")
+    }
 }

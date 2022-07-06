@@ -1,5 +1,7 @@
 package com.jomibusa.domain.register.model
 
+import com.jomibusa.domain.register.exception.FirstLetterOrDayConditionException
+import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Plate
 import org.junit.Assert
@@ -29,15 +31,11 @@ class CarRegisterTest {
 
         //Arrange
         val plate = Plate("ABS190")
-        val expectedMessage = "Restricción para placas que comienza con A y es lunes o domingo"
 
         //Act
-        try {
-            val carRegister = CarRegister(Car(plate), Date(1656781429))
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(FirstLetterOrDayConditionException::class.java) {
+            CarRegister(Car(plate), Date(1656781429))
         }
     }
 
@@ -46,15 +44,11 @@ class CarRegisterTest {
 
         //Arrange
         val plate = Plate("ABS190")
-        val expectedMessage = "Restricción para placas que comienza con A y es lunes o domingo"
 
         //Act
-        try {
-            val carRegister = CarRegister(Car(plate), Date(1656954229))
-            Assert.fail()
-        } catch (ex: Exception) {
-            //Assert
-            assertEquals(expectedMessage, ex.message)
+        //Assert
+        assertThrows(FirstLetterOrDayConditionException::class.java) {
+            CarRegister(Car(plate), Date(1656954229))
         }
     }
 

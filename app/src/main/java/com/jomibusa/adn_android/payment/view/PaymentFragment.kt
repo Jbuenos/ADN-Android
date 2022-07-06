@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.jomibusa.adn_android.databinding.FragmentPaymentBinding
+import com.jomibusa.adn_android.payment.viewmodel.PaymentViewModel
 
 class PaymentFragment : Fragment() {
 
     private var _binding: FragmentPaymentBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: PaymentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -11,8 +11,5 @@ class Motorcycle(val cylinderCapacity: Int, val numPlate: Plate) :
         }
     }
 
-    private fun validateNegativeCylinderCapacity(capacity: Int): Boolean {
-        return capacity < 0
-    }
-
+    private fun validateNegativeCylinderCapacity(capacity: Int): Boolean = capacity < 0
 }
