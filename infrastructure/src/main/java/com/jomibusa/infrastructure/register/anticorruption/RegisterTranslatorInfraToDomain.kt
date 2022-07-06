@@ -12,7 +12,7 @@ import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCars
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import java.util.*
 
-class RegisterTranslatorInfraToDomain {
+object RegisterTranslatorInfraToDomain {
 
     fun parseParkingRegisterCarEntityToDomain(registerWithCars: ParkingRegisterWithCars): CarRegister =
         CarRegister(

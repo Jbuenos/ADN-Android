@@ -5,7 +5,7 @@ import com.jomibusa.domain.vehicle.model.Plate
 
 interface RegisterRepository {
 
-    suspend fun getAllRegisters(): List<Register>?
+    suspend fun getAllRegisters(): List<Register>
 
     suspend fun findRegisterByPlate(plate: Plate): Register?
 

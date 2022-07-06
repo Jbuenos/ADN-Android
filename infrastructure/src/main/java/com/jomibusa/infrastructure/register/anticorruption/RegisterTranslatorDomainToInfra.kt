@@ -5,7 +5,7 @@ import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 
-class RegisterTranslatorDomainToInfra {
+object RegisterTranslatorDomainToInfra {
 
     fun parseParkingRegisterDomainToEntity(register: Register): ParkingRegisterEntity =
         ParkingRegisterEntity(

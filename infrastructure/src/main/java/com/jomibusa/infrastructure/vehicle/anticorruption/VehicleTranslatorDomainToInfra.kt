@@ -6,7 +6,7 @@ import com.jomibusa.domain.vehicle.model.Vehicle
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
 
-class VehicleTranslatorDomainToInfra {
+object VehicleTranslatorDomainToInfra {
 
     fun parseCarDomainToEntity(car: Car): CarEntity = CarEntity(car.plate.numPlate)
 
