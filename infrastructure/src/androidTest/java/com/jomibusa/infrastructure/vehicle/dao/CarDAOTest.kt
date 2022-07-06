@@ -5,12 +5,11 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNull
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
@@ -19,7 +18,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class CarDAOTest {
@@ -62,12 +60,12 @@ class CarDAOTest {
 
     @Test
     @Throws(Exception::class)
-    fun saveCarsAndReadToGetTheSameSize() {
+    fun saveCarsAndReadToGetTheExactSize() {
 
         //Arrange
         val car1 = CarEntity("HMT251")
-        val car2 = CarEntity("HMT251")
-        val car3 = CarEntity("HMT251")
+        val car2 = CarEntity("HMT252")
+        val car3 = CarEntity("HMT253")
 
         //Act
         db.carDAO.insertCar(car1)
@@ -81,7 +79,7 @@ class CarDAOTest {
 
     @Test
     @Throws(Exception::class)
-    fun getAllCarsAndGetNullList_null() {
+    fun getAllCarsAndGetEmptyList_empty() {
 
         //Arrange
 
@@ -90,7 +88,7 @@ class CarDAOTest {
         val listCars = db.carDAO.getAllCarsFromParking()
 
         //Assert
-        assertNull(listCars)
+        assertEquals(0, listCars?.size)
 
     }
 
@@ -100,15 +98,72 @@ class CarDAOTest {
 
         //Arrange
         val car = CarEntity("HMT251")
+        val car2 = CarEntity("HMT252")
+        val car3 = CarEntity("HMT253")
         db.carDAO.insertCar(car)
+        db.carDAO.insertCar(car2)
+        db.carDAO.insertCar(car3)
 
         //Act
-        db.carDAO.deleteCar(car)
+        db.carDAO.deleteCar(car3)
         val listCars = db.carDAO.getAllCarsFromParking()
 
         //Assert
-        assertNull(listCars)
+        assertEquals(2, listCars?.size)
 
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun saveCarAndFindByPlate_success() {
+
+        //Arrange
+        val car = CarEntity("HMT251")
+
+        //Act
+        db.carDAO.insertCar(car)
+        val carFound = db.carDAO.findCarByPlate("HMT251")
+
+        if (carFound != null) {
+
+            //Assert
+            assertThat(carFound.numPlate, CoreMatchers.equalTo(car.numPlate))
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun saveCarAndFindByPlate_emptyResult() {
+
+        //Arrange
+        val car = CarEntity("HMT251")
+
+        //Act
+        db.carDAO.insertCar(car)
+        val carFound = db.carDAO.findCarByPlate("HMT252")
+
+        //Assert
+        assertNull(carFound)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun saveCarAndRegisterAndReadFirstInListTheSameResult() {
+
+        //Arrange
+        val car = CarEntity("HMT251")
+        val carRegister = ParkingRegisterEntity(idPlateVehicle = car.numPlate, initDate = 1657134810)
+
+        //Act
+        db.carDAO.insertCar(car)
+        db.parkingRegisterDAO.insertParkingRegister(carRegister)
+        val listCars = db.carDAO.getAllCarsAndRegisterFromParking()
+        if (listCars != null && listCars.isNotEmpty()) {
+            val result = listCars[0]
+
+            //Assert
+            assertThat(result.parkingRegisterEntity.idPlateVehicle, CoreMatchers.equalTo(car.numPlate))
+        }
     }
 
 }

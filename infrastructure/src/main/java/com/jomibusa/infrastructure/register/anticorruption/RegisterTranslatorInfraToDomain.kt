@@ -2,22 +2,19 @@ package com.jomibusa.infrastructure.register.anticorruption
 
 import com.jomibusa.domain.register.model.CarRegister
 import com.jomibusa.domain.register.model.MotorcycleRegister
-import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
-import com.jomibusa.domain.vehicle.model.Vehicle
-import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCars
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import java.util.*
 
 object RegisterTranslatorInfraToDomain {
 
-    fun parseParkingRegisterCarEntityToDomain(registerWithCars: ParkingRegisterWithCars): CarRegister =
+    fun parseParkingRegisterCarEntityToDomain(registerWithCar: ParkingRegisterWithCars): CarRegister =
         CarRegister(
-            Car(Plate(registerWithCars.carEntity.numPlate)),
-            Date(registerWithCars.parkingRegisterEntity.initDate)
+            Car(Plate(registerWithCar.carEntity.numPlate)),
+            Date(registerWithCar.parkingRegisterEntity.initDate)
         )
 
     fun parseParkingRegisterMotorcycleEntityToDomain(registerWithMotorcycle: ParkingRegisterWithMotorcycle): MotorcycleRegister =
@@ -33,10 +30,7 @@ object RegisterTranslatorInfraToDomain {
         val listRegister: MutableList<CarRegister> = mutableListOf()
         listRegisterWithCars.forEach {
             listRegister.add(
-                CarRegister(
-                    Car(Plate(it.carEntity.numPlate)),
-                    Date(it.parkingRegisterEntity.initDate)
-                )
+                parseParkingRegisterCarEntityToDomain(it)
             )
         }
 
@@ -47,13 +41,7 @@ object RegisterTranslatorInfraToDomain {
         val listRegister: MutableList<MotorcycleRegister> = mutableListOf()
         listRegisterWithMotorcycle.forEach {
             listRegister.add(
-                MotorcycleRegister(
-                    Motorcycle(
-                        it.motorcycleEntity.cylinderCapacity,
-                        Plate(it.motorcycleEntity.numPlate)
-                    ),
-                    Date(it.parkingRegisterEntity.initDate)
-                )
+                parseParkingRegisterMotorcycleEntityToDomain(it)
             )
         }
 

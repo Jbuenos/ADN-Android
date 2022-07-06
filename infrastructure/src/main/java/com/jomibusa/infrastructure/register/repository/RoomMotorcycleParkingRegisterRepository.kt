@@ -7,6 +7,7 @@ import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorDomainToInfra
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorInfraToDomain
+import com.jomibusa.infrastructure.register.exception.DeleteEntityDatabaseException
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
 
@@ -52,7 +53,10 @@ class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: Parki
             RegisterTranslatorDomainToInfra.parseParkingRegisterDomainToEntity(register)
         val motorcycleEntity =
             VehicleTranslatorDomainToInfra.parseMotorcycleDomainToEntity(register.vehicle as Motorcycle)
-        parkingDatabase.motorcycleDAO.deleteMotorcycle(motorcycleEntity)
-        return parkingDatabase.parkingRegisterDAO.deleteParkingRegister(parkingRegisterEntity)
+        val deleteMotorcycle = parkingDatabase.motorcycleDAO.deleteMotorcycle(motorcycleEntity)
+        val deleteParkingRegister =
+            parkingDatabase.parkingRegisterDAO.deleteParkingRegister(parkingRegisterEntity)
+        if (deleteMotorcycle == -1 || deleteParkingRegister == -1) throw  DeleteEntityDatabaseException()
+        return deleteParkingRegister
     }
 }

@@ -17,7 +17,7 @@ object VehicleTranslatorInfraToDomain {
     fun parseCarEntityToDomain(listCarEntity: List<CarEntity>): List<Car> {
         val listCars: MutableList<Car> = mutableListOf()
         listCarEntity.forEach {
-            listCars.add(Car(Plate(it.numPlate)))
+            listCars.add(parseCarEntityToDomain(it))
         }
 
         return listCars
@@ -26,7 +26,7 @@ object VehicleTranslatorInfraToDomain {
     fun parseMotorcycleEntityToDomain(listMotorcycleEntity: List<MotorcycleEntity>): List<Motorcycle> {
         val listMotorcycle: MutableList<Motorcycle> = mutableListOf()
         listMotorcycleEntity.forEach {
-            listMotorcycle.add(Motorcycle(it.cylinderCapacity, Plate(it.numPlate)))
+            listMotorcycle.add(parseMotorcycleEntityToDomain(it))
         }
 
         return listMotorcycle

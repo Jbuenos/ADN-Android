@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
-import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 import junit.framework.TestCase
 import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert
@@ -15,7 +14,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
-import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 class ParkingRegisterDaoTest {
@@ -44,7 +42,7 @@ class ParkingRegisterDaoTest {
 
         //Arrange
         val parking =
-            ParkingRegisterEntity(UUID.randomUUID().toString().toLong(), "HMT251", 1656950400)
+            ParkingRegisterEntity(idPlateVehicle = "HMT251", initDate = 1656950400)
 
         //Act
         db.parkingRegisterDAO.insertParkingRegister(parking)
@@ -54,28 +52,28 @@ class ParkingRegisterDaoTest {
 
             //Assert
             MatcherAssert.assertThat(
-                newParking.idParkingRegister,
-                CoreMatchers.equalTo(parking.idParkingRegister)
+                newParking.idPlateVehicle,
+                CoreMatchers.equalTo(parking.idPlateVehicle)
             )
         }
     }
 
     @Test
     @Throws(Exception::class)
-    fun saveParkingRegisterAndReadToGetTheSameSize() {
+    fun saveParkingRegisterAndReadToGetTheExactSize() {
 
         //Arrange
         val parkingRegister1 =
-            ParkingRegisterEntity(UUID.randomUUID().toString().toLong(), "HMT251", 1656950400)
+            ParkingRegisterEntity(idPlateVehicle = "HMT251", initDate = 1656950400)
         val parkingRegister2 =
-            ParkingRegisterEntity(UUID.randomUUID().toString().toLong(), "UPA19C", 1656950400)
+            ParkingRegisterEntity(idPlateVehicle = "UPA19C", initDate = 1656950400)
         val parkingRegister3 =
-            ParkingRegisterEntity(UUID.randomUUID().toString().toLong(), "JRP310", 1656950400)
+            ParkingRegisterEntity(idPlateVehicle = "JRP310", initDate = 1656950400)
 
         //Act
-        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister1)
-        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister2)
-        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister3)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister1)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister2)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister3)
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
         TestCase.assertEquals(3, listParkingRegister?.size)
@@ -84,7 +82,7 @@ class ParkingRegisterDaoTest {
 
     @Test
     @Throws(Exception::class)
-    fun getAllParkingRegistersAndGetNullList_null() {
+    fun getAllParkingRegistersAndGetEmptyList_empty() {
 
         //Arrange
 
@@ -93,7 +91,7 @@ class ParkingRegisterDaoTest {
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
         //Assert
-        TestCase.assertNull(listParkingRegister)
+        TestCase.assertEquals(0, listParkingRegister?.size)
 
     }
 
@@ -103,16 +101,65 @@ class ParkingRegisterDaoTest {
 
         //Arrange
         val parkingRegister =
-            ParkingRegisterEntity(UUID.randomUUID().toString().toLong(), "HMT251", 1656950400)
+            ParkingRegisterEntity(1L, idPlateVehicle = "HMT251", initDate = 1656950400)
+        val parkingRegister2 =
+            ParkingRegisterEntity(2L, idPlateVehicle = "HMT252", initDate = 1656950401)
+        val parkingRegister3 =
+            ParkingRegisterEntity(3L, idPlateVehicle = "HMT253", initDate = 1656950402)
+        val parkingRegister4 =
+            ParkingRegisterEntity(4L, idPlateVehicle = "HMT254", initDate = 1656950403)
+
         db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister2)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister3)
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister4)
 
         //Act
+        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister3)
         db.parkingRegisterDAO.deleteParkingRegister(parkingRegister)
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
         //Assert
-        TestCase.assertNull(listParkingRegister)
+        TestCase.assertEquals(2, listParkingRegister?.size)
 
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun saveParkingRegisterAndFindByPlate_success() {
+
+        //Arrange
+        val parkingRegister =
+            ParkingRegisterEntity(1L, idPlateVehicle = "HMT251", initDate = 1656950400)
+
+        //Act
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
+        val parkingRegisterFound = db.parkingRegisterDAO.findRegisterByPlate("HMT251")
+
+        if (parkingRegisterFound != null) {
+
+            //Assert
+            MatcherAssert.assertThat(
+                parkingRegisterFound.idPlateVehicle,
+                CoreMatchers.equalTo(parkingRegister.idPlateVehicle)
+            )
+        }
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun saveParkingRegisterAndFindByPlate_emptyResult() {
+
+        //Arrange
+        val parkingRegister =
+            ParkingRegisterEntity(1L, idPlateVehicle = "HMT251", initDate = 1656950400)
+
+        //Act
+        db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
+        val parkingRegisterFound = db.parkingRegisterDAO.findRegisterByPlate("HMT252")
+
+        //Assert
+        TestCase.assertNull(parkingRegisterFound)
     }
 
 }
