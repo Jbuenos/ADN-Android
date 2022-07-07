@@ -3,7 +3,7 @@ package com.jomibusa.domain.payment.model
 import com.jomibusa.domain.register.model.MotorcycleRegister
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
-import org.junit.Assert.assertNotNull
+import org.junit.Assert.*
 import org.junit.Test
 import java.util.*
 
@@ -13,7 +13,7 @@ class MotorcyclePaymentTest {
     fun motorcyclePayment_createMotorcyclePaymentWithCorrectInformation_successful() {
 
         //Arrange
-        val register = MotorcycleRegister(Motorcycle(250, Plate("JRP310")), Date())
+        val register = MotorcycleRegister(Motorcycle(250, Plate("UPA19C")), Date())
 
         //Act
         val motorcyclePayment = MotorcyclePayment(register)
@@ -24,17 +24,17 @@ class MotorcyclePaymentTest {
     }
 
     @Test
-    fun motorcyclePayment_calculateTotalServiceWithInformation_calculate() {
+    fun motorcyclePayment_calculateTotalServiceWithInformation_calculateZero() {
 
-        /* //Arrange
-         val register = MotorcycleRegister(Motorcycle(250, Plate("JRP310")), Date(1656943200))
-         val motorcyclePayment = MotorcyclePayment(register)
+        //Arrange
+        val register = MotorcycleRegister(Motorcycle(400, Plate("UPA19C")), Date())
+        val motorcyclePayment = CarPayment(register)
 
-         //Act
-         val totalService = motorcyclePayment.calculateTotalService()
+        //Act
+        val totalService = motorcyclePayment.calculateTotalService()
 
-         //Assert
-         Assert.assertEquals(5000, totalService.toInt())*/
+        //Assert
+        assertEquals(0.0, totalService, 0.0)
 
     }
 
