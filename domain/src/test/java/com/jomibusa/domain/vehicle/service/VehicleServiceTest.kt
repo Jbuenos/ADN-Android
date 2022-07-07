@@ -85,7 +85,7 @@ class VehicleServiceTest {
         val vehicle = vehicleService.getVehicleByPlate(vehicleModel.plate)
 
         //Assert
-        Assert.assertNull(vehicle)
+        assertNull(vehicle)
     }
 
 }

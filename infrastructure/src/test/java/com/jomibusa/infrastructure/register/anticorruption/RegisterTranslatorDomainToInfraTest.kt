@@ -4,7 +4,7 @@ import com.jomibusa.domain.register.model.CarRegister
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
-import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import java.util.*
@@ -27,7 +27,7 @@ class RegisterTranslatorDomainToInfraTest {
         //Assert
         assertThat(
             registerEntity.idPlateVehicle,
-            CoreMatchers.equalTo(parseRegisterEntity.idPlateVehicle)
+            equalTo(parseRegisterEntity.idPlateVehicle)
         )
 
     }

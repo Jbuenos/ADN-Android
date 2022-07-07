@@ -2,9 +2,8 @@ package com.jomibusa.domain.vehicle.model
 
 import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import com.jomibusa.domain.vehicle.exception.NegativeCylinderCapacityException
-import org.junit.Assert
-import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class MotorcycleTest {
@@ -31,7 +30,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(InvalidPatternPlateException::class.java) {
+        assertThrows(InvalidPatternPlateException::class.java) {
             Motorcycle(500, plate)
         }
     }
@@ -44,7 +43,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(NegativeCylinderCapacityException::class.java) {
+        assertThrows(NegativeCylinderCapacityException::class.java) {
             Motorcycle(-500, plate)
         }
     }
@@ -57,7 +56,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(InvalidPatternPlateException::class.java) {
+        assertThrows(InvalidPatternPlateException::class.java) {
             Motorcycle(500, plate)
         }
     }
@@ -70,7 +69,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(InvalidPatternPlateException::class.java) {
+        assertThrows(InvalidPatternPlateException::class.java) {
             Motorcycle(350, plate)
         }
     }
@@ -83,7 +82,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(InvalidPatternPlateException::class.java) {
+        assertThrows(InvalidPatternPlateException::class.java) {
             Motorcycle(250, plate)
         }
     }
@@ -96,7 +95,7 @@ class MotorcycleTest {
 
         //Act
         //Assert
-        Assert.assertThrows(InvalidPatternPlateException::class.java) {
+        assertThrows(InvalidPatternPlateException::class.java) {
             Motorcycle(300, plate)
         }
     }

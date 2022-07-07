@@ -9,12 +9,8 @@ import com.jomibusa.domain.vehicle.model.Plate
 class RegisterService(private val repository: RegisterRepository) {
 
     private suspend fun validateMaxSpaces(register: Register): Boolean {
-        val numVehicles = repository.getAllRegisters()?.size
-        if (numVehicles != null) {
-            if (numVehicles > register.capacityParking) throw CapacityParkingExceededException() else return true
-        } else {
-            return false
-        }
+        val numVehicles = repository.getAllRegisters().size
+        if (numVehicles >= register.capacityParking) throw CapacityParkingExceededException() else return true
     }
 
     private suspend fun findPreviousVehicleRegister(plate: Plate): Register? =

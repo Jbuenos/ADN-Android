@@ -10,7 +10,7 @@ import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCars
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
-import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import java.util.*
@@ -34,7 +34,7 @@ class RegisterTranslatorInfraToDomainTest {
         //Assert
         assertThat(
             result.vehicle.plate,
-            CoreMatchers.equalTo(parseCarRegisterDomain.vehicle.plate)
+            equalTo(parseCarRegisterDomain.vehicle.plate)
         )
     }
 
@@ -58,7 +58,7 @@ class RegisterTranslatorInfraToDomainTest {
         //Assert
         assertThat(
             result.vehicle.plate,
-            CoreMatchers.equalTo(parseMotorcycleRegisterDomain.vehicle.plate)
+            equalTo(parseMotorcycleRegisterDomain.vehicle.plate)
         )
     }
 

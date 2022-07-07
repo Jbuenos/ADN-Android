@@ -1,13 +1,11 @@
 package com.jomibusa.domain.register.model
 
 import com.jomibusa.domain.register.exception.FirstLetterOrDayConditionException
-import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Plate
-import org.junit.Assert
-import org.junit.Assert.*
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertThrows
 import org.junit.Test
-import java.time.LocalDate
 import java.util.*
 
 class CarRegisterTest {

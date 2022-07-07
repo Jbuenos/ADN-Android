@@ -7,10 +7,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
-import junit.framework.TestCase
-import org.hamcrest.CoreMatchers
-import org.hamcrest.MatcherAssert
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,9 +52,9 @@ class MotorcycleDAOTest {
             val newMotorcycle = listMotorcycles[0]
 
             //Assert
-            MatcherAssert.assertThat(
+            assertThat(
                 newMotorcycle.numPlate,
-                CoreMatchers.equalTo(motorcycle.numPlate)
+                equalTo(motorcycle.numPlate)
             )
         }
     }
@@ -73,7 +74,7 @@ class MotorcycleDAOTest {
         db.motorcycleDAO.insertMotorcycle(motorcycle3)
         val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
 
-        TestCase.assertEquals(3, listMotorcycles?.size)
+        assertEquals(3, listMotorcycles?.size)
 
     }
 
@@ -88,7 +89,7 @@ class MotorcycleDAOTest {
         val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
 
         //Assert
-        TestCase.assertEquals(0, listMotorcycles?.size)
+        assertEquals(0, listMotorcycles?.size)
 
     }
 
@@ -109,7 +110,7 @@ class MotorcycleDAOTest {
         val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
 
         //Assert
-        TestCase.assertEquals(2, listMotorcycles?.size)
+        assertEquals(2, listMotorcycles?.size)
 
     }
 
@@ -127,9 +128,9 @@ class MotorcycleDAOTest {
         if (motorcycleFound != null) {
 
             //Assert
-            MatcherAssert.assertThat(
+            assertThat(
                 motorcycleFound.numPlate,
-                CoreMatchers.equalTo(motorcycle.numPlate)
+                equalTo(motorcycle.numPlate)
             )
         }
     }
@@ -146,7 +147,7 @@ class MotorcycleDAOTest {
         val motorcycleFound = db.motorcycleDAO.findMotorcycleByPlate("UPA20C")
 
         //Assert
-        TestCase.assertNull(motorcycleFound)
+        assertNull(motorcycleFound)
     }
 
     @Test
@@ -166,9 +167,9 @@ class MotorcycleDAOTest {
             val result = listMotorcycle[0]
 
             //Assert
-            MatcherAssert.assertThat(
+            assertThat(
                 result.parkingRegisterEntity.idPlateVehicle,
-                CoreMatchers.equalTo(motorcycle.numPlate)
+                equalTo(motorcycle.numPlate)
             )
         }
     }

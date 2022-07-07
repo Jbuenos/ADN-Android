@@ -3,7 +3,7 @@ package com.jomibusa.domain.payment.model
 import com.jomibusa.domain.register.model.CarRegister
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Plate
-import org.junit.Assert
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 import java.util.*
 
@@ -19,7 +19,7 @@ class CarPaymentTest {
         val carPayment = CarPayment(register)
 
         //Assert
-        Assert.assertNotNull(carPayment)
+        assertNotNull(carPayment)
 
     }
 

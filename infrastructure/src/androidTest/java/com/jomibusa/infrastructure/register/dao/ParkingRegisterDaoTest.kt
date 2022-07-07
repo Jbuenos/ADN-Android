@@ -6,10 +6,11 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
-import junit.framework.TestCase
-import org.hamcrest.CoreMatchers
-import org.hamcrest.MatcherAssert
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,9 +52,9 @@ class ParkingRegisterDaoTest {
             val newParking = listParkingRegister[0]
 
             //Assert
-            MatcherAssert.assertThat(
+            assertThat(
                 newParking.idPlateVehicle,
-                CoreMatchers.equalTo(parking.idPlateVehicle)
+                equalTo(parking.idPlateVehicle)
             )
         }
     }
@@ -76,7 +77,7 @@ class ParkingRegisterDaoTest {
         db.parkingRegisterDAO.insertParkingRegister(parkingRegister3)
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
-        TestCase.assertEquals(3, listParkingRegister?.size)
+        assertEquals(3, listParkingRegister?.size)
 
     }
 
@@ -91,7 +92,7 @@ class ParkingRegisterDaoTest {
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
         //Assert
-        TestCase.assertEquals(0, listParkingRegister?.size)
+        assertEquals(0, listParkingRegister?.size)
 
     }
 
@@ -120,7 +121,7 @@ class ParkingRegisterDaoTest {
         val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
 
         //Assert
-        TestCase.assertEquals(2, listParkingRegister?.size)
+        assertEquals(2, listParkingRegister?.size)
 
     }
 
@@ -139,9 +140,9 @@ class ParkingRegisterDaoTest {
         if (parkingRegisterFound != null) {
 
             //Assert
-            MatcherAssert.assertThat(
+            assertThat(
                 parkingRegisterFound.idPlateVehicle,
-                CoreMatchers.equalTo(parkingRegister.idPlateVehicle)
+                equalTo(parkingRegister.idPlateVehicle)
             )
         }
     }
@@ -159,7 +160,7 @@ class ParkingRegisterDaoTest {
         val parkingRegisterFound = db.parkingRegisterDAO.findRegisterByPlate("HMT252")
 
         //Assert
-        TestCase.assertNull(parkingRegisterFound)
+        assertNull(parkingRegisterFound)
     }
 
 }
