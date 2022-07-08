@@ -8,6 +8,6 @@ class RegisterProvider : IRegisterProvider {
     //private val registerService =  RegisterService()
 
     override suspend fun insertNewRegister(plate: Plate) {
-
+        
     }
 }

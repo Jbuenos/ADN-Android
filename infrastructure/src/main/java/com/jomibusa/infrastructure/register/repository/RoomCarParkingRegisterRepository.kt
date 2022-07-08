@@ -8,6 +8,7 @@ import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorDomainToInfra
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorInfraToDomain
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
+import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCar
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
 
 class RoomCarParkingRegisterRepository(private val parkingDatabase: ParkingDatabase) :
@@ -34,21 +35,18 @@ class RoomCarParkingRegisterRepository(private val parkingDatabase: ParkingDatab
         }
     }
 
-    override suspend fun insertRegister(register: Register) {
-        val registerEntity =
+    private fun getParkingRegisterWithCar(register: Register): ParkingRegisterWithCar {
+        return ParkingRegisterWithCar(
+            VehicleTranslatorDomainToInfra.parseCarDomainToEntity(register.vehicle as Car),
             RegisterTranslatorDomainToInfra.parseParkingRegisterDomainToEntity(register)
-        val carEntity =
-            VehicleTranslatorDomainToInfra.parseCarDomainToEntity(register.vehicle as Car)
-        parkingDatabase.parkingRegisterDAO.insertParkingRegister(registerEntity)
-        parkingDatabase.carDAO.insertCar(carEntity)
+        )
     }
 
-    override suspend fun deleteRegister(register: Register): Int {
-        val parkingRegisterEntity =
-            RegisterTranslatorDomainToInfra.parseParkingRegisterDomainToEntity(register)
-        val carEntity =
-            VehicleTranslatorDomainToInfra.parseCarDomainToEntity(register.vehicle as Car)
-        parkingDatabase.carDAO.deleteCar(carEntity)
-        return parkingDatabase.parkingRegisterDAO.deleteParkingRegister(parkingRegisterEntity)
+    override suspend fun insertRegister(register: Register) {
+        parkingDatabase.parkingRegisterDAO.saveRegisterWithCar(getParkingRegisterWithCar(register))
+    }
+
+    override suspend fun deleteRegister(register: Register) {
+        parkingDatabase.parkingRegisterDAO.deleteRegisterWithCar(getParkingRegisterWithCar(register))
     }
 }

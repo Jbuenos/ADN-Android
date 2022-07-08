@@ -14,12 +14,6 @@ interface MotorcycleDAO {
     @Query("SELECT * FROM motorcycle")
     fun getAllMotorcyclesAndRegisterFromParking(): List<ParkingRegisterWithMotorcycle>?
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insertMotorcycle(vararg motorcycle: MotorcycleEntity)
-
-    @Delete
-    fun deleteMotorcycle(vararg motorcycleEntity: MotorcycleEntity): Int
-
     @Query("SELECT * FROM motorcycle WHERE numPlate = :numPlate")
     fun findMotorcycleByPlate(vararg numPlate: String): MotorcycleEntity?
 

@@ -6,7 +6,7 @@ import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.entities.ParkingRegisterEntity
-import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCars
+import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithCar
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import com.jomibusa.infrastructure.vehicle.entities.CarEntity
 import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
@@ -22,7 +22,7 @@ class RegisterTranslatorInfraToDomainTest {
         //Arrange
         val carEntity = CarEntity("HMT251")
         val parkingRegisterEntity = ParkingRegisterEntity(1L, "HMT251", Date().time)
-        val registerWithCar = ParkingRegisterWithCars(carEntity, parkingRegisterEntity)
+        val registerWithCar = ParkingRegisterWithCar(carEntity, parkingRegisterEntity)
 
         val parseCarRegisterDomain =
             CarRegister(Car(Plate("HMT251")), Date())

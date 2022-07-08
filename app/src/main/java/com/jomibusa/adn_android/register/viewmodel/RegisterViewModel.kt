@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.jomibusa.adn_android.register.model.IRegisterProvider
 import com.jomibusa.adn_android.register.model.RegisterProvider
 import com.jomibusa.domain.vehicle.model.Plate
-import com.jomibusa.domain.vehicle.service.VehicleService
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {

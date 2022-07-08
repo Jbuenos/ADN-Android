@@ -6,9 +6,9 @@ import com.jomibusa.domain.register.repository.RegisterRepository
 
 class PaymentService(private val repository: RegisterRepository) {
 
-    suspend fun deleteRegister(register: Register): Int {
+    suspend fun deleteRegister(register: Register) {
         if (repository.findRegisterByPlate(register.vehicle.plate) != null) {
-            return repository.deleteRegister(register)
+            repository.deleteRegister(register)
         } else {
             throw VehicleNotFoundInParkingException()
         }

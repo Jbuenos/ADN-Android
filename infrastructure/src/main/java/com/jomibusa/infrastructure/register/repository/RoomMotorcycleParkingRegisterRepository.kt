@@ -7,21 +7,12 @@ import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorDomainToInfra
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorInfraToDomain
-import com.jomibusa.infrastructure.register.exception.DeleteEntityDatabaseException
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
+import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
 
 class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: ParkingDatabase) :
     RegisterRepository {
-
-    override suspend fun insertRegister(register: Register) {
-        val registerEntity =
-            RegisterTranslatorDomainToInfra.parseParkingRegisterDomainToEntity(register)
-        val motorcycleEntity =
-            VehicleTranslatorDomainToInfra.parseMotorcycleDomainToEntity(register.vehicle as Motorcycle)
-        parkingDatabase.parkingRegisterDAO.insertParkingRegister(registerEntity)
-        parkingDatabase.motorcycleDAO.insertMotorcycle(motorcycleEntity)
-    }
 
     override suspend fun getAllRegisters(): List<Register> {
         val allRegisterFromParking =
@@ -48,15 +39,22 @@ class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: Parki
         }
     }
 
-    override suspend fun deleteRegister(register: Register): Int {
-        val parkingRegisterEntity =
+    private fun getParkingRegisterWithMotorcycle(register: Register): ParkingRegisterWithMotorcycle {
+        return ParkingRegisterWithMotorcycle(
+            VehicleTranslatorDomainToInfra.parseMotorcycleDomainToEntity(register.vehicle as Motorcycle),
             RegisterTranslatorDomainToInfra.parseParkingRegisterDomainToEntity(register)
-        val motorcycleEntity =
-            VehicleTranslatorDomainToInfra.parseMotorcycleDomainToEntity(register.vehicle as Motorcycle)
-        val deleteMotorcycle = parkingDatabase.motorcycleDAO.deleteMotorcycle(motorcycleEntity)
-        val deleteParkingRegister =
-            parkingDatabase.parkingRegisterDAO.deleteParkingRegister(parkingRegisterEntity)
-        if (deleteMotorcycle == -1 || deleteParkingRegister == -1) throw  DeleteEntityDatabaseException()
-        return deleteParkingRegister
+        )
+    }
+
+    override suspend fun insertRegister(register: Register) {
+        parkingDatabase.parkingRegisterDAO.saveRegisterWithMotorcycle(
+            getParkingRegisterWithMotorcycle(register)
+        )
+    }
+
+    override suspend fun deleteRegister(register: Register) {
+        parkingDatabase.parkingRegisterDAO.deleteRegisterWithMotorcycle(
+            getParkingRegisterWithMotorcycle(register)
+        )
     }
 }
