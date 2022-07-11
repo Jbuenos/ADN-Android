@@ -10,15 +10,7 @@ interface MotorcycleDAO {
     @Query("SELECT * FROM motorcycle")
     fun getAllMotorcyclesFromParking(): List<MotorcycleEntity>?
 
-    @Transaction
-    @Query("SELECT * FROM motorcycle")
-    fun getAllMotorcyclesAndRegisterFromParking(): List<ParkingRegisterWithMotorcycle>?
-
     @Query("SELECT * FROM motorcycle WHERE numPlate = :numPlate")
     fun findMotorcycleByPlate(vararg numPlate: String): MotorcycleEntity?
-
-    @Transaction
-    @Query("SELECT * FROM motorcycle WHERE numPlate = :numPlate")
-    fun findMotorcycleAndRegisterByPlate(vararg numPlate: String): ParkingRegisterWithMotorcycle?
 
 }

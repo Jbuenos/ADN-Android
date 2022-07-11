@@ -10,15 +10,7 @@ interface CarDAO {
     @Query("SELECT * FROM car")
     fun getAllCarsFromParking(): List<CarEntity>?
 
-    @Transaction
-    @Query("SELECT * FROM car")
-    fun getAllCarsAndRegisterFromParking(): List<ParkingRegisterWithCar>?
-
     @Query("SELECT * FROM car WHERE numPlate = :numPlate")
     fun findCarByPlate(vararg numPlate: String): CarEntity?
-
-    @Transaction
-    @Query("SELECT * FROM car WHERE numPlate = :numPlate")
-    fun findCarAndRegisterByPlate(vararg numPlate: String): ParkingRegisterWithCar?
 
 }

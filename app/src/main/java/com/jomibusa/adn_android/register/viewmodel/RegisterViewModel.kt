@@ -7,11 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.jomibusa.adn_android.register.model.IRegisterProvider
 import com.jomibusa.adn_android.register.model.RegisterProvider
 import com.jomibusa.domain.vehicle.model.Plate
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
-
-    private val provider: IRegisterProvider = RegisterProvider()
+@HiltViewModel
+class RegisterViewModel @Inject constructor(private val provider: RegisterProvider): ViewModel() {
 
     private var _getError = MutableLiveData<Boolean>()
     val getError: LiveData<Boolean> get() = _getError

@@ -7,16 +7,18 @@ import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorDomainToInfra
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorInfraToDomain
+import com.jomibusa.infrastructure.register.dao.ParkingRegisterDAO
 import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
+import javax.inject.Inject
 
-class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: ParkingDatabase) :
+class RoomMotorcycleParkingRegisterRepository @Inject constructor(private val parkingRegisterDAO: ParkingRegisterDAO) :
     RegisterRepository {
 
     override suspend fun getAllRegisters(): List<Register> {
         val allRegisterFromParking =
-            parkingDatabase.motorcycleDAO.getAllMotorcyclesAndRegisterFromParking()
+            parkingRegisterDAO.getAllMotorcyclesAndRegisterFromParking()
         var listDomain: List<MotorcycleRegister> = listOf()
         allRegisterFromParking?.let {
             listDomain =
@@ -29,7 +31,7 @@ class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: Parki
 
     override suspend fun findRegisterByPlate(plate: Plate): Register? {
         val registerEntity =
-            parkingDatabase.motorcycleDAO.findMotorcycleAndRegisterByPlate(plate.numPlate)
+            parkingRegisterDAO.findMotorcycleAndRegisterByPlate(plate.numPlate)
         return if (registerEntity != null) {
             RegisterTranslatorInfraToDomain.parseParkingRegisterMotorcycleEntityToDomain(
                 registerEntity
@@ -47,13 +49,13 @@ class RoomMotorcycleParkingRegisterRepository(private val parkingDatabase: Parki
     }
 
     override suspend fun insertRegister(register: Register) {
-        parkingDatabase.parkingRegisterDAO.saveRegisterWithMotorcycle(
+        parkingRegisterDAO.saveRegisterWithMotorcycle(
             getParkingRegisterWithMotorcycle(register)
         )
     }
 
     override suspend fun deleteRegister(register: Register) {
-        parkingDatabase.parkingRegisterDAO.deleteRegisterWithMotorcycle(
+        parkingRegisterDAO.deleteRegisterWithMotorcycle(
             getParkingRegisterWithMotorcycle(register)
         )
     }

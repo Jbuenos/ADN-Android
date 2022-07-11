@@ -3,6 +3,7 @@ package com.jomibusa.domain.register.repository
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.vehicle.model.Plate
 
+
 interface RegisterRepository {
 
     suspend fun getAllRegisters(): List<Register>

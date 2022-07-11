@@ -5,8 +5,9 @@ import com.jomibusa.domain.register.exception.ExistSameVehicleException
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.register.repository.RegisterRepository
 import com.jomibusa.domain.vehicle.model.Plate
+import javax.inject.Inject
 
-class RegisterService(private val repository: RegisterRepository) {
+class RegisterService @Inject constructor(private val repository: RegisterRepository) {
 
     private suspend fun validateMaxSpaces(register: Register): Boolean {
         val numVehicles = repository.getAllRegisters().size

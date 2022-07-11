@@ -58,4 +58,20 @@ interface ParkingRegisterDAO {
         deleteParkingRegister(withMotorcycle.parkingRegisterEntity)
     }
 
+    @Transaction
+    @Query("SELECT * FROM car")
+    fun getAllCarsAndRegisterFromParking(): List<ParkingRegisterWithCar>?
+
+    @Transaction
+    @Query("SELECT * FROM motorcycle")
+    fun getAllMotorcyclesAndRegisterFromParking(): List<ParkingRegisterWithMotorcycle>?
+
+    @Transaction
+    @Query("SELECT * FROM car WHERE numPlate = :numPlate")
+    fun findCarAndRegisterByPlate(vararg numPlate: String): ParkingRegisterWithCar?
+
+    @Transaction
+    @Query("SELECT * FROM motorcycle WHERE numPlate = :numPlate")
+    fun findMotorcycleAndRegisterByPlate(vararg numPlate: String): ParkingRegisterWithMotorcycle?
+
 }

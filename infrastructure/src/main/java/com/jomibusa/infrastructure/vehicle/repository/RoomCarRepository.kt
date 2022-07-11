@@ -10,7 +10,7 @@ import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorInfra
 class RoomCarRepository(private val parkingDatabase: ParkingDatabase) : VehicleRepository {
 
     override suspend fun getAllVehicles(): List<Vehicle> {
-        val allCarsFromParking = parkingDatabase.carDAO.getAllCarsFromParking()
+        val allCarsFromParking = parkingDatabase.carDAO().getAllCarsFromParking()
         var listDomain: List<Car> = listOf()
         allCarsFromParking?.let {
             listDomain = VehicleTranslatorInfraToDomain.parseCarEntityToDomain(it)
@@ -19,7 +19,7 @@ class RoomCarRepository(private val parkingDatabase: ParkingDatabase) : VehicleR
     }
 
     override suspend fun findVehicleByPlate(plate: Plate): Vehicle? {
-        val carEntity = parkingDatabase.carDAO.findCarByPlate(plate.numPlate)
+        val carEntity = parkingDatabase.carDAO().findCarByPlate(plate.numPlate)
         return if (carEntity != null) VehicleTranslatorInfraToDomain.parseCarEntityToDomain(
             carEntity
         ) else null

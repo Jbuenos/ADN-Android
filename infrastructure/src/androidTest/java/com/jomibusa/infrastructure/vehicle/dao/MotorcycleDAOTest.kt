@@ -29,7 +29,7 @@ class MotorcycleDAOTest {
         db = Room.inMemoryDatabaseBuilder(
             context, ParkingDatabase::class.java
         ).build()
-        motorcycleDAO = db.motorcycleDAO
+        motorcycleDAO = db.motorcycleDAO()
     }
 
     @After
@@ -46,8 +46,8 @@ class MotorcycleDAOTest {
         val motorcycle = MotorcycleEntity("UPA19C", 450)
 
         //Act
-        db.motorcycleDAO.insertMotorcycle(motorcycle)
-        val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle)
+        val listMotorcycles = db.motorcycleDAO().getAllMotorcyclesFromParking()
         if (listMotorcycles != null && listMotorcycles.isNotEmpty()) {
             val newMotorcycle = listMotorcycles[0]
 
@@ -69,10 +69,10 @@ class MotorcycleDAOTest {
         val motorcycle3 = MotorcycleEntity("JRP34K", 250)
 
         //Act
-        db.motorcycleDAO.insertMotorcycle(motorcycle1)
-        db.motorcycleDAO.insertMotorcycle(motorcycle2)
-        db.motorcycleDAO.insertMotorcycle(motorcycle3)
-        val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle1)
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle2)
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle3)
+        val listMotorcycles = db.motorcycleDAO().getAllMotorcyclesFromParking()
 
         assertEquals(3, listMotorcycles?.size)
 
@@ -86,7 +86,7 @@ class MotorcycleDAOTest {
 
         //Act
 
-        val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
+        val listMotorcycles = db.motorcycleDAO().getAllMotorcyclesFromParking()
 
         //Assert
         assertEquals(0, listMotorcycles?.size)
@@ -101,13 +101,13 @@ class MotorcycleDAOTest {
         val motorcycle = MotorcycleEntity("UPA19C", 250)
         val motorcycle2 = MotorcycleEntity("UPA20C", 250)
         val motorcycle3 = MotorcycleEntity("UPA21C", 250)
-        db.motorcycleDAO.insertMotorcycle(motorcycle)
-        db.motorcycleDAO.insertMotorcycle(motorcycle2)
-        db.motorcycleDAO.insertMotorcycle(motorcycle3)
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle)
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle2)
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle3)
 
         //Act
-        db.motorcycleDAO.deleteMotorcycle(motorcycle2)
-        val listMotorcycles = db.motorcycleDAO.getAllMotorcyclesFromParking()
+        db.parkingRegisterDAO().deleteMotorcycle(motorcycle2)
+        val listMotorcycles = db.motorcycleDAO().getAllMotorcyclesFromParking()
 
         //Assert
         assertEquals(2, listMotorcycles?.size)
@@ -122,8 +122,8 @@ class MotorcycleDAOTest {
         val motorcycle = MotorcycleEntity("UPA19C", 250)
 
         //Act
-        db.motorcycleDAO.insertMotorcycle(motorcycle)
-        val motorcycleFound = db.motorcycleDAO.findMotorcycleByPlate("UPA19C")
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle)
+        val motorcycleFound = db.motorcycleDAO().findMotorcycleByPlate("UPA19C")
 
         if (motorcycleFound != null) {
 
@@ -143,8 +143,8 @@ class MotorcycleDAOTest {
         val motorcycle = MotorcycleEntity("UPA19C", 450)
 
         //Act
-        db.motorcycleDAO.insertMotorcycle(motorcycle)
-        val motorcycleFound = db.motorcycleDAO.findMotorcycleByPlate("UPA20C")
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle)
+        val motorcycleFound = db.motorcycleDAO().findMotorcycleByPlate("UPA20C")
 
         //Assert
         assertNull(motorcycleFound)
@@ -160,9 +160,9 @@ class MotorcycleDAOTest {
             ParkingRegisterEntity(idPlateVehicle = motorcycle.numPlate, initDate = 1657134810)
 
         //Act
-        db.motorcycleDAO.insertMotorcycle(motorcycle)
-        db.parkingRegisterDAO.insertParkingRegister(motorcycleRegister)
-        val listMotorcycle = db.motorcycleDAO.getAllMotorcyclesAndRegisterFromParking()
+        db.parkingRegisterDAO().insertMotorcycle(motorcycle)
+        db.parkingRegisterDAO().insertParkingRegister(motorcycleRegister)
+        val listMotorcycle = db.parkingRegisterDAO().getAllMotorcyclesAndRegisterFromParking()
         if (listMotorcycle != null && listMotorcycle.isNotEmpty()) {
             val result = listMotorcycle[0]
 

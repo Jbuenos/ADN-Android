@@ -31,7 +31,7 @@ class CarDAOTest {
         db = Room.inMemoryDatabaseBuilder(
             context, ParkingDatabase::class.java
         ).build()
-        carDAO = db.carDAO
+        carDAO = db.carDAO()
     }
 
     @After
@@ -48,8 +48,8 @@ class CarDAOTest {
         val car = CarEntity("HMT251")
 
         //Act
-        db.carDAO.insertCar(car)
-        val listCars = db.carDAO.getAllCarsFromParking()
+        db.parkingRegisterDAO().insertCar(car)
+        val listCars = db.carDAO().getAllCarsFromParking()
         if (listCars != null && listCars.isNotEmpty()) {
             val newCar = listCars[0]
 
@@ -68,10 +68,10 @@ class CarDAOTest {
         val car3 = CarEntity("HMT253")
 
         //Act
-        db.carDAO.insertCar(car1)
-        db.carDAO.insertCar(car2)
-        db.carDAO.insertCar(car3)
-        val listCars = db.carDAO.getAllCarsFromParking()
+        db.parkingRegisterDAO().insertCar(car1)
+        db.parkingRegisterDAO().insertCar(car2)
+        db.parkingRegisterDAO().insertCar(car3)
+        val listCars = db.carDAO().getAllCarsFromParking()
 
         assertEquals(3, listCars?.size)
 
@@ -85,7 +85,7 @@ class CarDAOTest {
 
         //Act
 
-        val listCars = db.carDAO.getAllCarsFromParking()
+        val listCars = db.carDAO().getAllCarsFromParking()
 
         //Assert
         assertEquals(0, listCars?.size)
@@ -100,13 +100,13 @@ class CarDAOTest {
         val car = CarEntity("HMT251")
         val car2 = CarEntity("HMT252")
         val car3 = CarEntity("HMT253")
-        db.carDAO.insertCar(car)
-        db.carDAO.insertCar(car2)
-        db.carDAO.insertCar(car3)
+        db.parkingRegisterDAO().insertCar(car)
+        db.parkingRegisterDAO().insertCar(car2)
+        db.parkingRegisterDAO().insertCar(car3)
 
         //Act
-        db.carDAO.deleteCar(car3)
-        val listCars = db.carDAO.getAllCarsFromParking()
+        db.parkingRegisterDAO().deleteCar(car3)
+        val listCars = db.carDAO().getAllCarsFromParking()
 
         //Assert
         assertEquals(2, listCars?.size)
@@ -121,8 +121,8 @@ class CarDAOTest {
         val car = CarEntity("HMT251")
 
         //Act
-        db.carDAO.insertCar(car)
-        val carFound = db.carDAO.findCarByPlate("HMT251")
+        db.parkingRegisterDAO().insertCar(car)
+        val carFound = db.carDAO().findCarByPlate("HMT251")
 
         if (carFound != null) {
 
@@ -139,8 +139,8 @@ class CarDAOTest {
         val car = CarEntity("HMT251")
 
         //Act
-        db.carDAO.insertCar(car)
-        val carFound = db.carDAO.findCarByPlate("HMT252")
+        db.parkingRegisterDAO().insertCar(car)
+        val carFound = db.carDAO().findCarByPlate("HMT252")
 
         //Assert
         assertNull(carFound)
@@ -155,9 +155,9 @@ class CarDAOTest {
         val carRegister = ParkingRegisterEntity(idPlateVehicle = car.numPlate, initDate = 1657134810)
 
         //Act
-        db.carDAO.insertCar(car)
-        db.parkingRegisterDAO.insertParkingRegister(carRegister)
-        val listCars = db.carDAO.getAllCarsAndRegisterFromParking()
+        db.parkingRegisterDAO().insertCar(car)
+        db.parkingRegisterDAO().insertParkingRegister(carRegister)
+        val listCars = db.parkingRegisterDAO().getAllCarsAndRegisterFromParking()
         if (listCars != null && listCars.isNotEmpty()) {
             val result = listCars[0]
 

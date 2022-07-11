@@ -28,7 +28,7 @@ class ParkingRegisterDaoTest {
         db = Room.inMemoryDatabaseBuilder(
             context, ParkingDatabase::class.java
         ).build()
-        parkingRegisterDAO = db.parkingRegisterDAO
+        parkingRegisterDAO = db.parkingRegisterDAO()
     }
 
     @After
@@ -46,8 +46,8 @@ class ParkingRegisterDaoTest {
             ParkingRegisterEntity(idPlateVehicle = "HMT251", initDate = 1656950400)
 
         //Act
-        db.parkingRegisterDAO.insertParkingRegister(parking)
-        val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
+        db.parkingRegisterDAO().insertParkingRegister(parking)
+        val listParkingRegister = db.parkingRegisterDAO().getAllParkingRegister()
         if (listParkingRegister != null && listParkingRegister.isNotEmpty()) {
             val newParking = listParkingRegister[0]
 
@@ -72,10 +72,10 @@ class ParkingRegisterDaoTest {
             ParkingRegisterEntity(idPlateVehicle = "JRP310", initDate = 1656950400)
 
         //Act
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister1)
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister2)
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister3)
-        val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister1)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister2)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister3)
+        val listParkingRegister = db.parkingRegisterDAO().getAllParkingRegister()
 
         assertEquals(3, listParkingRegister?.size)
 
@@ -89,7 +89,7 @@ class ParkingRegisterDaoTest {
 
         //Act
 
-        val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
+        val listParkingRegister = db.parkingRegisterDAO().getAllParkingRegister()
 
         //Assert
         assertEquals(0, listParkingRegister?.size)
@@ -110,15 +110,15 @@ class ParkingRegisterDaoTest {
         val parkingRegister4 =
             ParkingRegisterEntity(4L, idPlateVehicle = "HMT254", initDate = 1656950403)
 
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister2)
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister3)
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister4)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister2)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister3)
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister4)
 
         //Act
-        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister3)
-        db.parkingRegisterDAO.deleteParkingRegister(parkingRegister)
-        val listParkingRegister = db.parkingRegisterDAO.getAllParkingRegister()
+        db.parkingRegisterDAO().deleteParkingRegister(parkingRegister3)
+        db.parkingRegisterDAO().deleteParkingRegister(parkingRegister)
+        val listParkingRegister = db.parkingRegisterDAO().getAllParkingRegister()
 
         //Assert
         assertEquals(2, listParkingRegister?.size)
@@ -134,8 +134,8 @@ class ParkingRegisterDaoTest {
             ParkingRegisterEntity(1L, idPlateVehicle = "HMT251", initDate = 1656950400)
 
         //Act
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
-        val parkingRegisterFound = db.parkingRegisterDAO.findRegisterByPlate("HMT251")
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister)
+        val parkingRegisterFound = db.parkingRegisterDAO().findRegisterByPlate("HMT251")
 
         if (parkingRegisterFound != null) {
 
@@ -156,8 +156,8 @@ class ParkingRegisterDaoTest {
             ParkingRegisterEntity(1L, idPlateVehicle = "HMT251", initDate = 1656950400)
 
         //Act
-        db.parkingRegisterDAO.insertParkingRegister(parkingRegister)
-        val parkingRegisterFound = db.parkingRegisterDAO.findRegisterByPlate("HMT252")
+        db.parkingRegisterDAO().insertParkingRegister(parkingRegister)
+        val parkingRegisterFound = db.parkingRegisterDAO().findRegisterByPlate("HMT252")
 
         //Assert
         assertNull(parkingRegisterFound)

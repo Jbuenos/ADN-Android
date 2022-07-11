@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentRegisterBinding
 import com.jomibusa.adn_android.register.viewmodel.RegisterViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
@@ -28,11 +30,10 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+    }
 
     private fun setListenerRadioButton() {
         binding.radioGroupVehicles.setOnCheckedChangeListener { _, optionId ->
@@ -47,6 +48,11 @@ class RegisterFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

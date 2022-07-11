@@ -10,7 +10,7 @@ import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorInfra
 class RoomMotorcycleRepository(private val parkingDatabase: ParkingDatabase) : VehicleRepository {
 
     override suspend fun getAllVehicles(): List<Vehicle> {
-        val allMotorcyclesFromParking = parkingDatabase.motorcycleDAO.getAllMotorcyclesFromParking()
+        val allMotorcyclesFromParking = parkingDatabase.motorcycleDAO().getAllMotorcyclesFromParking()
         var listDomain: List<Motorcycle> = listOf()
         allMotorcyclesFromParking?.let {
             listDomain = VehicleTranslatorInfraToDomain.parseMotorcycleEntityToDomain(it)
@@ -20,7 +20,7 @@ class RoomMotorcycleRepository(private val parkingDatabase: ParkingDatabase) : V
 
     override suspend fun findVehicleByPlate(plate: Plate): Vehicle? {
         val motorcycleEntity =
-            parkingDatabase.motorcycleDAO.findMotorcycleByPlate(plate.numPlate)
+            parkingDatabase.motorcycleDAO().findMotorcycleByPlate(plate.numPlate)
         return if (motorcycleEntity != null) VehicleTranslatorInfraToDomain.parseMotorcycleEntityToDomain(
             motorcycleEntity
         ) else null
