@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/parkingFragment"
-        android:name="com.jomibusa.adn_android.parking.view.ParkingFragment"
+        android:name="com.jomibusa.adn_android.menuparking.view.MenuParkingFragment"
         android:label="fragment_parking"
         tools:layout="@layout/fragment_parking">
         <action

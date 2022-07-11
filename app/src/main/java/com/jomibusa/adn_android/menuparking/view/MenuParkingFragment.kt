@@ -1,4 +1,4 @@
-package com.jomibusa.adn_android.parking.view
+package com.jomibusa.adn_android.menuparking.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.databinding.FragmentParkingBinding
 
-class ParkingFragment : Fragment() {
+class MenuParkingFragment : Fragment() {
 
     private var _binding: FragmentParkingBinding? = null
     private val binding get() = _binding!!
@@ -22,11 +22,11 @@ class ParkingFragment : Fragment() {
         binding.apply {
 
             materialButtonRegister.setOnClickListener {
-                findNavController().navigate(ParkingFragmentDirections.actionParkingFragmentToRegisterFragment())
+                findNavController().navigate(MenuParkingFragmentDirections.actionParkingFragmentToRegisterFragment())
             }
 
             materialButtonPayment.setOnClickListener {
-                findNavController().navigate(ParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
+                findNavController().navigate(MenuParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
             }
 
         }

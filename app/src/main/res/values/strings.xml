@@ -11,4 +11,6 @@
     <string name="text_payment_button">Calcular pago</string>
     <string name="text_payment_total_payment">Total a pagar:</string>
     <string name="text_register_motorcycle_cylinder_capacity">Cilindraje</string>
+    <string name="text_message_general_exception">Ocurrió un error, por favor inténtelo de nuevo más tarde</string>
+    <string name="text_message_register_success">Vehículo registrado exitosamente</string>
 </resources>
