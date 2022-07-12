@@ -8,7 +8,6 @@ import com.jomibusa.domain.vehicle.model.Plate
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorDomainToInfra
 import com.jomibusa.infrastructure.register.anticorruption.RegisterTranslatorInfraToDomain
 import com.jomibusa.infrastructure.register.dao.ParkingRegisterDAO
-import com.jomibusa.infrastructure.shared.database.ParkingDatabase
 import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
 import com.jomibusa.infrastructure.vehicle.anticorruption.VehicleTranslatorDomainToInfra
 import javax.inject.Inject

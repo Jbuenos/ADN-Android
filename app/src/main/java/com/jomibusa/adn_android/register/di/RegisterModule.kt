@@ -7,19 +7,20 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Qualifier
+
+/*@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RegisterCarRepository
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RegisterMotorcycleRepository*/
 
 @Module
 @InstallIn(ViewModelComponent::class)
 abstract class RegisterModule {
-
-    /*@Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class RegisterCarRepository
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class RegisterMotorcycleRepository*/
 
     @Binds
     //@RegisterCarRepository
