@@ -54,8 +54,8 @@ class RoomMotorcycleParkingRegisterRepository @Inject constructor(private val pa
         )
     }
 
-    override suspend fun deleteRegister(register: Register) {
-        parkingRegisterDAO.deleteRegisterWithMotorcycle(
+    override suspend fun deleteRegister(register: Register): Int {
+        return parkingRegisterDAO.deleteRegisterWithMotorcycle(
             getParkingRegisterWithMotorcycle(register)
         )
     }

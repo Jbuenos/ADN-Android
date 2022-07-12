@@ -47,7 +47,7 @@ class RoomCarParkingRegisterRepository @Inject constructor(private val parkingRe
         parkingRegisterDAO.saveRegisterWithCar(getParkingRegisterWithCar(register))
     }
 
-    override suspend fun deleteRegister(register: Register) {
-        parkingRegisterDAO.deleteRegisterWithCar(getParkingRegisterWithCar(register))
+    override suspend fun deleteRegister(register: Register): Int {
+        return parkingRegisterDAO.deleteRegisterWithCar(getParkingRegisterWithCar(register))
     }
 }

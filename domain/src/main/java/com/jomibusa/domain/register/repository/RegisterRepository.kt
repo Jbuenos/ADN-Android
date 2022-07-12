@@ -12,6 +12,6 @@ interface RegisterRepository {
 
     suspend fun insertRegister(register: Register)
 
-    suspend fun deleteRegister(register: Register)
+    suspend fun deleteRegister(register: Register): Int
 
 }

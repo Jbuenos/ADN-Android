@@ -54,23 +54,17 @@ class PaymentFragment : Fragment() {
         }
 
         viewModel.doPayment.observe(viewLifecycleOwner) { result ->
-            if (result) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.text_message_payment_success),
-                    Toast.LENGTH_SHORT
-                ).show()
+            if (result != -1) {
+                showMessage(getString(R.string.text_message_payment_success))
                 findNavController().popBackStack()
+            } else {
+                showMessage(getString(R.string.text_message_general_exception))
             }
         }
 
         viewModel.getError.observe(viewLifecycleOwner) { isError ->
             if (isError) {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.text_message_general_exception),
-                    Toast.LENGTH_SHORT
-                ).show()
+                showMessage(getString(R.string.text_message_general_exception))
                 findNavController().popBackStack()
             }
         }
@@ -85,12 +79,16 @@ class PaymentFragment : Fragment() {
             binding.textViewPayment.text = "Total a pagar: ${payment.second}"
             binding.materialButtonPayment.visibility = View.VISIBLE
         } else {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.text_message_vehicle_not_found),
-                Toast.LENGTH_LONG
-            ).show()
+            showMessage(getString(R.string.text_message_vehicle_not_found))
         }
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onDestroyView() {

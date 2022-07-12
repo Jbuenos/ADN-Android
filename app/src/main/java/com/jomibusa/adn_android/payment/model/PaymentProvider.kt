@@ -36,8 +36,8 @@ class PaymentProvider @Inject constructor(
         }
     }
 
-    suspend fun payService(register: Register) {
-        paymentService.deleteRegister(register)
+    suspend fun payService(register: Register): Int {
+        return paymentService.deleteRegister(register)
     }
 
 }

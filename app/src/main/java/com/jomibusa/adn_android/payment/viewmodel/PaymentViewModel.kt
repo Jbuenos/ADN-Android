@@ -22,8 +22,8 @@ class PaymentViewModel @Inject constructor(private val provider: PaymentProvider
     private var _getValueService = MutableLiveData<Pair<Register?, Double>>()
     val getValueService: LiveData<Pair<Register?, Double>> get() = _getValueService
 
-    private var _doPayment = MutableLiveData<Boolean>()
-    val doPayment: LiveData<Boolean> get() = _doPayment
+    private var _doPayment = MutableLiveData<Int>()
+    val doPayment: LiveData<Int> get() = _doPayment
 
     fun calculateService(numPlate: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -40,8 +40,7 @@ class PaymentViewModel @Inject constructor(private val provider: PaymentProvider
     fun doPayment(register: Register) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                provider.payService(register)
-                _doPayment.postValue(true)
+                _doPayment.postValue(provider.payService(register))
             } catch (e: Exception) {
                 Log.e("TEST_ERROR", "Error: $e")
                 _getError.postValue(true)

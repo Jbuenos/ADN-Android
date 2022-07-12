@@ -47,15 +47,15 @@ interface ParkingRegisterDAO {
     }
 
     @Transaction
-    fun deleteRegisterWithCar(withCars: ParkingRegisterWithCar) {
+    fun deleteRegisterWithCar(withCars: ParkingRegisterWithCar): Int {
         deleteCar(withCars.carEntity)
-        deleteParkingRegister(withCars.parkingRegisterEntity)
+        return deleteParkingRegister(withCars.parkingRegisterEntity)
     }
 
     @Transaction
-    fun deleteRegisterWithMotorcycle(withMotorcycle: ParkingRegisterWithMotorcycle) {
+    fun deleteRegisterWithMotorcycle(withMotorcycle: ParkingRegisterWithMotorcycle): Int {
         deleteMotorcycle(withMotorcycle.motorcycleEntity)
-        deleteParkingRegister(withMotorcycle.parkingRegisterEntity)
+        return deleteParkingRegister(withMotorcycle.parkingRegisterEntity)
     }
 
     @Transaction

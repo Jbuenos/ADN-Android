@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class PaymentService @Inject constructor(private val repository: RegisterRepository) {
 
-    suspend fun deleteRegister(register: Register) {
+    suspend fun deleteRegister(register: Register): Int {
         if (repository.findRegisterByPlate(register.vehicle.plate) != null) {
-            repository.deleteRegister(register)
+            return repository.deleteRegister(register)
         } else {
             throw VehicleNotFoundInParkingException()
         }
