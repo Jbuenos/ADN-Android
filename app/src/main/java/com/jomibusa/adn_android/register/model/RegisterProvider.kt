@@ -11,7 +11,6 @@ import javax.inject.Inject
 class RegisterProvider @Inject constructor(private val registerService: RegisterService) {
 
     suspend fun insertNewRegister(vehicle: Vehicle) {
-
         val register = when (vehicle) {
             is Car -> CarRegister(vehicle, Date())
             else -> MotorcycleRegister(vehicle, Date())

@@ -13,4 +13,7 @@
     <string name="text_register_motorcycle_cylinder_capacity">Cilindraje</string>
     <string name="text_message_general_exception">Ocurrió un error, por favor inténtelo de nuevo más tarde</string>
     <string name="text_message_register_success">Vehículo registrado exitosamente</string>
+    <string name="text_do_payment">PAGAR</string>
+    <string name="text_message_vehicle_not_found">No se encontró un registro para esa placa</string>
+    <string name="text_message_payment_success">Pago realizado exitosamente</string>
 </resources>

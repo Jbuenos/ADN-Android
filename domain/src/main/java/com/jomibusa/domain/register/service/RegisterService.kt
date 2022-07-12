@@ -14,7 +14,7 @@ class RegisterService @Inject constructor(private val repository: RegisterReposi
         if (numVehicles >= register.capacityParking) throw CapacityParkingExceededException() else return true
     }
 
-    private suspend fun findPreviousVehicleRegister(plate: Plate): Register? =
+    suspend fun findPreviousVehicleRegister(plate: Plate): Register? =
         repository.findRegisterByPlate(plate)
 
     suspend fun insertNewRegister(register: Register) {
