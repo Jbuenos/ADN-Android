@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentRegisterBinding
+import com.jomibusa.adn_android.payment.model.VehicleType
 import com.jomibusa.adn_android.register.viewmodel.RegisterViewModel
 import com.jomibusa.domain.register.exception.CapacityParkingExceededException
 import com.jomibusa.domain.register.exception.ExistSameVehicleException
@@ -28,7 +29,7 @@ class RegisterFragment : Fragment() {
 
     private val viewModel: RegisterViewModel by viewModels()
 
-    private var isCar = true
+    private var vehicleType = VehicleType.CAR
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,11 +67,11 @@ class RegisterFragment : Fragment() {
             kotlin.run {
                 when (optionId) {
                     R.id.radio_button_car -> {
-                        isCar = true
+                        vehicleType = VehicleType.CAR
                         binding.textInputLayoutCylinderCapacity.visibility = View.GONE
                     }
                     R.id.radio_button_motorcycle -> {
-                        isCar = false
+                        vehicleType = VehicleType.MOTORCYCLE
                         binding.textInputLayoutCylinderCapacity.visibility = View.VISIBLE
                     }
                 }
@@ -81,10 +82,13 @@ class RegisterFragment : Fragment() {
     private fun setListenerRegister() {
         binding.materialButtonRegister.setOnClickListener {
             try {
-                val vehicle = if (isCar) {
-                    Car(Plate(binding.textInputEditTextPlate.text.toString().uppercase()))
-                } else {
-                    Motorcycle(
+                val vehicle = when (vehicleType) {
+                    VehicleType.CAR -> Car(
+                        Plate(
+                            binding.textInputEditTextPlate.text.toString().uppercase()
+                        )
+                    )
+                    VehicleType.MOTORCYCLE -> Motorcycle(
                         binding.textInputEditTextCylinderCapacity.text.toString().toInt(),
                         Plate(binding.textInputEditTextPlate.text.toString().uppercase())
                     )

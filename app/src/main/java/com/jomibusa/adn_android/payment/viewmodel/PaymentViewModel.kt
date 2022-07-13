@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jomibusa.adn_android.payment.model.PaymentProvider
+import com.jomibusa.adn_android.payment.model.VehicleType
 import com.jomibusa.domain.register.model.Register
 import com.jomibusa.domain.vehicle.model.Plate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,11 +26,11 @@ class PaymentViewModel @Inject constructor(private val provider: PaymentProvider
     private var _doPayment = MutableLiveData<Int>()
     val doPayment: LiveData<Int> get() = _doPayment
 
-    fun calculateService(numPlate: String) {
+    fun calculateService(vehicleType: VehicleType, numPlate: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val plate = Plate(numPlate)
-                _getValueService.postValue(provider.calculateService(plate))
+                _getValueService.postValue(provider.calculateService(vehicleType, plate))
             } catch (e: Exception) {
                 Log.e("TEST_ERROR", "Error: $e")
                 _getError.postValue(true)
@@ -37,10 +38,10 @@ class PaymentViewModel @Inject constructor(private val provider: PaymentProvider
         }
     }
 
-    fun doPayment(register: Register) {
+    fun doPayment(vehicleType: VehicleType, register: Register) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _doPayment.postValue(provider.payService(register))
+                _doPayment.postValue(provider.payService(vehicleType, register))
             } catch (e: Exception) {
                 Log.e("TEST_ERROR", "Error: $e")
                 _getError.postValue(true)

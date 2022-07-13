@@ -1,10 +1,12 @@
 package com.jomibusa.adn_android.payment.model
 
-import com.jomibusa.domain.payment.service.PaymentService
+import com.jomibusa.domain.payment.service.CarPaymentService
+import com.jomibusa.domain.payment.service.MotorcyclePaymentService
 import com.jomibusa.domain.register.exception.VehicleNotFoundInParkingException
 import com.jomibusa.domain.register.model.CarRegister
 import com.jomibusa.domain.register.repository.RegisterRepository
-import com.jomibusa.domain.register.service.RegisterService
+import com.jomibusa.domain.register.service.CarRegisterService
+import com.jomibusa.domain.register.service.MotorcycleRegisterService
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Plate
 import junit.framework.Assert.assertEquals
@@ -28,13 +30,11 @@ class PaymentProviderTest {
             Mockito.`when`(registerRepository.findRegisterByPlate(vehicle.plate))
                 .thenReturn(null)
         }
-        val registerService = RegisterService(registerRepository)
-        val paymentService = PaymentService(registerRepository)
-        val paymentProvider = PaymentProvider(registerService, paymentService)
+        val paymentProvider = getPaymentProvider(registerRepository)
 
         //Act
         runTest {
-            val result = paymentProvider.calculateService(vehicle.plate)
+            val result = paymentProvider.calculateService(VehicleType.CAR, vehicle.plate)
 
             //Assert
             assertNull(result.first)
@@ -50,13 +50,11 @@ class PaymentProviderTest {
             Mockito.`when`(registerRepository.findRegisterByPlate(vehicle.plate))
                 .thenReturn(CarRegister(vehicle, Date()))
         }
-        val registerService = RegisterService(registerRepository)
-        val paymentService = PaymentService(registerRepository)
-        val paymentProvider = PaymentProvider(registerService, paymentService)
+        val paymentProvider = getPaymentProvider(registerRepository)
 
         //Act
         runTest {
-            val result = paymentProvider.calculateService(vehicle.plate)
+            val result = paymentProvider.calculateService(VehicleType.CAR, vehicle.plate)
 
             //Assert
             assertEquals(0.0, result.second)
@@ -72,15 +70,13 @@ class PaymentProviderTest {
             Mockito.`when`(registerRepository.findRegisterByPlate(vehicle.plate))
                 .thenReturn(null)
         }
-        val registerService = RegisterService(registerRepository)
-        val paymentService = PaymentService(registerRepository)
-        val paymentProvider = PaymentProvider(registerService, paymentService)
+        val paymentProvider = getPaymentProvider(registerRepository)
 
         //Act
         //Assert
         Assert.assertThrows(VehicleNotFoundInParkingException::class.java) {
             runTest {
-                paymentProvider.payService(CarRegister(vehicle, Date()))
+                paymentProvider.payService(VehicleType.CAR, CarRegister(vehicle, Date()))
             }
         }
     }
@@ -97,17 +93,29 @@ class PaymentProviderTest {
             Mockito.`when`(registerRepository.deleteRegister(vehicleRegister))
                 .thenReturn(1)
         }
-        val registerService = RegisterService(registerRepository)
-        val paymentService = PaymentService(registerRepository)
-        val paymentProvider = PaymentProvider(registerService, paymentService)
+
+        val paymentProvider = getPaymentProvider(registerRepository)
 
         //Act
         runTest {
-            val result = paymentProvider.payService(vehicleRegister)
+            val result = paymentProvider.payService(VehicleType.CAR, vehicleRegister)
 
             //Assert
             assertEquals(1, result)
         }
+    }
+
+    private fun getPaymentProvider(registerRepository: RegisterRepository): PaymentProvider {
+        val motorcycleRegisterService = MotorcycleRegisterService(registerRepository)
+        val carRegisterService = CarRegisterService(registerRepository)
+        val carPaymentService = CarPaymentService(registerRepository)
+        val motorcyclePaymentService = MotorcyclePaymentService(registerRepository)
+        return PaymentProvider(
+            carRegisterService,
+            motorcycleRegisterService,
+            carPaymentService,
+            motorcyclePaymentService
+        )
     }
 
 }

@@ -14,10 +14,10 @@ import org.mockito.Mockito
 import java.util.*
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class PaymentServiceTest {
+class MotorcyclePaymentServiceTest {
 
     @Test
-    fun deleteVehicle_findNullRegister_exception() {
+    fun deleteMotorcycle_findNullRegister_exception() {
         //Arrange
         val register = CarRegister(Car(Plate("JRP251")), Date())
         val registerRepository = Mockito.mock(RegisterRepository::class.java)
@@ -25,7 +25,7 @@ class PaymentServiceTest {
             Mockito.`when`(registerRepository.findRegisterByPlate(register.vehicle.plate))
                 .thenReturn(null)
         }
-        val paymentService = PaymentService(registerRepository)
+        val paymentService = MotorcyclePaymentService(registerRepository)
 
         //Act
         //Assert
@@ -37,7 +37,7 @@ class PaymentServiceTest {
     }
 
     @Test
-    fun deleteVehicle_findRegister_success() {
+    fun deleteMotorcycle_findRegister_success() {
         //Arrange
         val register = CarRegister(Car(Plate("JRP251")), Date())
         val registerRepository = Mockito.mock(RegisterRepository::class.java)
@@ -47,7 +47,7 @@ class PaymentServiceTest {
             Mockito.`when`(registerRepository.deleteRegister(register))
                 .thenReturn(1)
         }
-        val paymentService = PaymentService(registerRepository)
+        val paymentService = MotorcyclePaymentService(registerRepository)
 
         //Act
         runTest {

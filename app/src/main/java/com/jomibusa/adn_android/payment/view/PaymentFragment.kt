@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentPaymentBinding
+import com.jomibusa.adn_android.payment.model.VehicleType
 import com.jomibusa.adn_android.payment.viewmodel.PaymentViewModel
 import com.jomibusa.domain.register.model.Register
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +25,8 @@ class PaymentFragment : Fragment() {
 
     private lateinit var register: Register
 
+    private var vehicleType = VehicleType.CAR
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +37,14 @@ class PaymentFragment : Fragment() {
 
             materialButtonCalculatePayment.setOnClickListener {
                 val plate = textInputEditTextSearch.text.toString().uppercase()
-                viewModel.calculateService(plate)
+                viewModel.calculateService(vehicleType, plate)
             }
 
             materialButtonPayment.setOnClickListener {
-                viewModel.doPayment(register)
+                viewModel.doPayment(vehicleType, register)
             }
+
+            setListenerRadioButton()
 
         }
 
@@ -71,15 +76,35 @@ class PaymentFragment : Fragment() {
 
     }
 
+    private fun setListenerRadioButton() {
+        binding.radioGroupVehicles.setOnCheckedChangeListener { _, optionId ->
+            kotlin.run {
+                when (optionId) {
+                    R.id.radio_button_car -> {
+                        vehicleType = VehicleType.CAR
+                    }
+                    R.id.radio_button_motorcycle -> {
+                        vehicleType = VehicleType.MOTORCYCLE
+                    }
+                }
+            }
+        }
+    }
+
     private fun validatePayment(payment: Pair<Register?, Double>) {
         if (payment.first != null) {
             register = payment.first!!
             binding.materialButtonCalculatePayment.visibility = View.GONE
+            binding.radioGroupVehicles.visibility = View.GONE
             binding.textViewPayment.visibility = View.VISIBLE
             binding.textViewPayment.text = "Total a pagar: ${payment.second}"
             binding.materialButtonPayment.visibility = View.VISIBLE
         } else {
-            showMessage(getString(R.string.text_message_vehicle_not_found))
+            val message = when (vehicleType) {
+                VehicleType.CAR -> getString(R.string.text_message_car_not_found)
+                VehicleType.MOTORCYCLE -> getString(R.string.text_message_motorcycle_not_found)
+            }
+            showMessage(message)
         }
     }
 

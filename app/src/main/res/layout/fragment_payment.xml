@@ -34,6 +34,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
 
+        <RadioGroup
+            android:id="@+id/radio_group_vehicles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_parking">
+
+            <RadioButton
+                android:id="@+id/radio_button_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:checked="true"
+                android:text="@string/text_register_car" />
+
+            <RadioButton
+                android:id="@+id/radio_button_motorcycle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/text_register_motorcycle" />
+
+        </RadioGroup>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_plate"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,7 +75,7 @@
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_view_parking">
+            app:layout_constraintTop_toBottomOf="@id/radio_group_vehicles">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_edit_text_search"
