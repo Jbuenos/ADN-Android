@@ -44,9 +44,6 @@ android {
             unitTests.returnDefaultValues = true
         }
     }
-    hilt {
-        enableTransformForLocalTests = true
-    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -96,6 +93,9 @@ dependencies {
     androidTestImplementation 'io.insert-koin:koin-test-junit4:3.0.2'
     androidTestImplementation 'org.mockito:mockito-android:2.24.5'
     debugImplementation "androidx.fragment:fragment-testing:1.5.0"
+
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.3'
+    testImplementation 'org.mockito:mockito-core:3.3.3'
 
     //navigation controller
     def nav_version_ktx = "2.5.0"
