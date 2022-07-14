@@ -18,4 +18,5 @@
     <string name="text_message_motorcycle_not_found">No se encontró un registro de la moto con esa placa</string>
     <string name="text_message_payment_success">Pago realizado exitosamente</string>
     <string name="text_message_empty_cylinder_capacity">El cilindraje no puede estar en blanco!</string>
+    <string name="text_message_total_service">Total a pagar %1$s</string>
 </resources>

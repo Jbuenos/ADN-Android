@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentPaymentBinding
 import com.jomibusa.adn_android.payment.model.VehicleType
+import com.jomibusa.adn_android.payment.util.Util.parseCurrency
 import com.jomibusa.adn_android.payment.viewmodel.PaymentViewModel
 import com.jomibusa.domain.register.model.Register
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,7 +98,8 @@ class PaymentFragment : Fragment() {
             binding.materialButtonCalculatePayment.visibility = View.GONE
             binding.radioGroupVehicles.visibility = View.GONE
             binding.textViewPayment.visibility = View.VISIBLE
-            binding.textViewPayment.text = "Total a pagar: ${payment.second}"
+            binding.textViewPayment.text =
+                getString(R.string.text_message_total_service, payment.second.parseCurrency())
             binding.materialButtonPayment.visibility = View.VISIBLE
         } else {
             val message = when (vehicleType) {
