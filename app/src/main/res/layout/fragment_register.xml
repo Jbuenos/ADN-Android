@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".register.view.RegisterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_margin="16dp">
 
         <TextView
             android:id="@+id/text_view_title"
@@ -26,7 +27,7 @@
 
         <ImageView
             android:id="@+id/image_view_parking"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="120dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/parking"
@@ -36,8 +37,9 @@
 
         <RadioGroup
             android:id="@+id/radio_group_vehicles"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,15 +50,15 @@
                 android:id="@+id/radio_button_car"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:checked="true"
+                android:padding="16dp"
                 android:text="@string/text_register_car" />
 
             <RadioButton
                 android:id="@+id/radio_button_motorcycle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:padding="16dp"
                 android:text="@string/text_register_motorcycle" />
 
         </RadioGroup>
@@ -66,7 +68,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/text_register_hint_plate"
             android:textColorHint="@color/secondary_gray"
             app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
@@ -96,7 +98,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
             android:hint="@string/text_register_motorcycle_cylinder_capacity"
             android:textColorHint="@color/secondary_gray"
             android:visibility="gone"
@@ -127,7 +129,7 @@
             android:id="@+id/material_button_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
             android:padding="16dp"
             android:text="@string/text_parking_register"
             android:textColor="@color/white"

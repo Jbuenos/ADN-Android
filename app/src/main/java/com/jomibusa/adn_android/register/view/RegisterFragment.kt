@@ -15,11 +15,7 @@ import com.jomibusa.adn_android.register.viewmodel.RegisterViewModel
 import com.jomibusa.domain.register.exception.CapacityParkingExceededException
 import com.jomibusa.domain.register.exception.ExistSameVehicleException
 import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
-import com.jomibusa.domain.vehicle.model.Car
-import com.jomibusa.domain.vehicle.model.Motorcycle
-import com.jomibusa.domain.vehicle.model.Plate
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
@@ -81,24 +77,29 @@ class RegisterFragment : Fragment() {
 
     private fun setListenerRegister() {
         binding.materialButtonRegister.setOnClickListener {
-            try {
-                val vehicle = when (vehicleType) {
-                    VehicleType.CAR -> Car(
-                        Plate(
-                            binding.textInputEditTextPlate.text.toString().uppercase()
+            when (vehicleType) {
+                VehicleType.CAR -> viewModel.insertNewRegister(
+                    vehicleType,
+                    binding.textInputEditTextPlate.text.toString().uppercase()
+                )
+                VehicleType.MOTORCYCLE -> {
+                    if (!isEmptyCylinderCapacity()) {
+                        viewModel.insertNewRegister(
+                            vehicleType,
+                            binding.textInputEditTextPlate.text.toString().uppercase(),
+                            binding.textInputEditTextCylinderCapacity.text.toString().toInt()
                         )
-                    )
-                    VehicleType.MOTORCYCLE -> Motorcycle(
-                        binding.textInputEditTextCylinderCapacity.text.toString().toInt(),
-                        Plate(binding.textInputEditTextPlate.text.toString().uppercase())
-                    )
+                    } else {
+                        binding.textInputEditTextCylinderCapacity.error =
+                            getString(R.string.text_message_empty_cylinder_capacity)
+                    }
                 }
-                viewModel.insertNewRegister(vehicle)
-            } catch (e: Exception) {
-                parseException(e)
             }
         }
     }
+
+    private fun isEmptyCylinderCapacity() =
+        binding.textInputEditTextCylinderCapacity.text.toString().isEmpty()
 
     private fun parseException(exception: Exception) {
         val message = when (exception) {
