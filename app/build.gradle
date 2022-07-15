@@ -122,3 +122,9 @@ task jacocoTestReport(type: JacocoReport,
     }
 
 }
+
+tasks.withType(Test) {
+    testLogging {
+        events "started", "passed", "skipped", "failed"
+    }
+}
