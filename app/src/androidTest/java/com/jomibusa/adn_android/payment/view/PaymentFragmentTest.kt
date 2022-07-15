@@ -16,12 +16,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.test.AutoCloseKoinTest
 import org.mockito.Mockito
 
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-class PaymentFragmentTest : AutoCloseKoinTest() {
+class PaymentFragmentTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)

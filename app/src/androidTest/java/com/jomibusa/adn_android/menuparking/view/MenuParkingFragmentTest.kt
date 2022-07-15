@@ -16,12 +16,11 @@ import com.jomibusa.adn_android.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.test.AutoCloseKoinTest
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
 @RunWith(AndroidJUnit4::class)
-class MenuParkingFragmentTest : AutoCloseKoinTest() {
+class MenuParkingFragmentTest {
 
     private lateinit var menuParking: FragmentScenario<MenuParkingFragment>
     private lateinit var mockNavController: NavController

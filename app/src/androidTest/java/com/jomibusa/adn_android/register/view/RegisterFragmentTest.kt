@@ -9,23 +9,19 @@ import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.launchFragmentInHiltContainer
-import com.jomibusa.adn_android.menuparking.view.MenuParkingFragmentDirections
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.koin.test.AutoCloseKoinTest
 import org.mockito.Mockito
 
 @ExperimentalCoroutinesApi
 @HiltAndroidTest
-class RegisterFragmentTest : AutoCloseKoinTest() {
+class RegisterFragmentTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
