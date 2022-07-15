@@ -1,7 +1,7 @@
 package com.jomibusa.infrastructure.vehicle.dao
 
-import androidx.room.*
-import com.jomibusa.infrastructure.shared.relation.ParkingRegisterWithMotorcycle
+import androidx.room.Dao
+import androidx.room.Query
 import com.jomibusa.infrastructure.vehicle.entities.MotorcycleEntity
 
 @Dao

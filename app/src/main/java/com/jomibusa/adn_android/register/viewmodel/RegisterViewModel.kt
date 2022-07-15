@@ -6,17 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jomibusa.adn_android.payment.model.VehicleType
+import com.jomibusa.adn_android.register.di.IoDispatcher
 import com.jomibusa.adn_android.register.model.RegisterProvider
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val provider: RegisterProvider) : ViewModel() {
+class RegisterViewModel @Inject constructor(
+    @IoDispatcher private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val provider: RegisterProvider
+) : ViewModel() {
 
     private var _getResultNewRegister = MutableLiveData<Boolean>()
     val getResultNewRegister: LiveData<Boolean> get() = _getResultNewRegister
@@ -25,7 +30,7 @@ class RegisterViewModel @Inject constructor(private val provider: RegisterProvid
     val getError: LiveData<Exception> get() = _getError
 
     fun insertNewRegister(vehicleType: VehicleType, plate: String, cylinderCapacity: Int = 0) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             try {
                 val vehicle = when (vehicleType) {
                     VehicleType.CAR -> Car(Plate(plate))
