@@ -27,7 +27,7 @@ class PaymentFragmentTest {
 
     private lateinit var mockNavController: NavController
 
-    @Before
+    /*@Before
     fun setUp() {
         hiltRule.inject()
         mockNavController = Mockito.mock(NavController::class.java)
@@ -58,7 +58,6 @@ class PaymentFragmentTest {
             replaceText(plate), closeSoftKeyboard()
         )
         onView(withId(R.id.material_button_calculate_payment)).perform(click())
-    }
-
+    }*/
 
 }

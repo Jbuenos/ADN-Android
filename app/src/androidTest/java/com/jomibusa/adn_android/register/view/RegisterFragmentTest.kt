@@ -28,7 +28,7 @@ class RegisterFragmentTest {
 
     private lateinit var mockNavController: NavController
 
-    @Before
+    /*@Before
     fun setUp() {
         hiltRule.inject()
         mockNavController = Mockito.mock(NavController::class.java)
@@ -76,7 +76,7 @@ class RegisterFragmentTest {
             replaceText("250"), closeSoftKeyboard()
         )
         onView(withId(R.id.material_button_register)).perform(ViewActions.click())
-    }
+    }*/
 
 
 }
