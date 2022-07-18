@@ -25,7 +25,7 @@ pipeline {
       steps{
         echo "------------>Unit Tests<------------"
 	    sh './gradlew clean'
-        sh './gradlew test'
+        sh 'env ANDROID_SERIAL=emulator-5554 ./gradlew test'
         sh './gradlew jacocoTestReport'
       }
     }
