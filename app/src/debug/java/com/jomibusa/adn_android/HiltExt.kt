@@ -1,3 +1,4 @@
+/*
 package com.jomibusa.adn_android
 
 import android.content.ComponentName
@@ -40,4 +41,4 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
             .commitNow()
         (fragment as T).action()
     }
-}
+}*/

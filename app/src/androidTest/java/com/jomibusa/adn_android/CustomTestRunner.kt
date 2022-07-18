@@ -1,3 +1,4 @@
+/*
 package com.jomibusa.adn_android
 
 import android.app.Application
@@ -11,4 +12,4 @@ class CustomTestRunner : AndroidJUnitRunner() {
         return super.newApplication(cl, HiltTestApplication::class.java.name, context)
     }
 
-}
+}*/
