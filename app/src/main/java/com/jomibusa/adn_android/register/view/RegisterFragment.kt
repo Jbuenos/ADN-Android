@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentRegisterBinding
 import com.jomibusa.adn_android.payment.model.VehicleType
+import com.jomibusa.adn_android.register.model.CarVehicleRegister
+import com.jomibusa.adn_android.register.model.MotorcycleVehicleRegister
 import com.jomibusa.adn_android.register.viewmodel.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -72,20 +74,18 @@ class RegisterFragment : Fragment() {
         binding.materialButtonRegister.setOnClickListener {
             when (vehicleType) {
                 VehicleType.CAR -> viewModel.insertNewRegister(
-                    vehicleType,
+                    CarVehicleRegister,
                     binding.textInputEditTextPlate.text.toString().uppercase()
                 )
-                VehicleType.MOTORCYCLE -> {
-                    if (!isEmptyCylinderCapacity()) {
-                        viewModel.insertNewRegister(
-                            vehicleType,
-                            binding.textInputEditTextPlate.text.toString().uppercase(),
-                            binding.textInputEditTextCylinderCapacity.text.toString().toInt()
-                        )
-                    } else {
-                        binding.textInputEditTextCylinderCapacity.error =
-                            getString(R.string.text_message_empty_cylinder_capacity)
-                    }
+                VehicleType.MOTORCYCLE -> if (!isEmptyCylinderCapacity()) {
+                    viewModel.insertNewRegister(
+                        MotorcycleVehicleRegister,
+                        binding.textInputEditTextPlate.text.toString().uppercase(),
+                        binding.textInputEditTextCylinderCapacity.text.toString().toInt()
+                    )
+                } else {
+                    binding.textInputEditTextCylinderCapacity.error =
+                        getString(R.string.text_message_empty_cylinder_capacity)
                 }
             }
         }
