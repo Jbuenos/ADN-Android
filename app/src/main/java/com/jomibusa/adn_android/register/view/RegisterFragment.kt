@@ -12,9 +12,6 @@ import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.databinding.FragmentRegisterBinding
 import com.jomibusa.adn_android.payment.model.VehicleType
 import com.jomibusa.adn_android.register.viewmodel.RegisterViewModel
-import com.jomibusa.domain.register.exception.CapacityParkingExceededException
-import com.jomibusa.domain.register.exception.ExistSameVehicleException
-import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,15 +41,11 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getError.observe(viewLifecycleOwner) { exception ->
-            parseException(exception)
+            showMessage(exception)
         }
 
         viewModel.getResultNewRegister.observe(viewLifecycleOwner) {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.text_message_register_success),
-                Toast.LENGTH_SHORT
-            ).show()
+            showMessage(getString(R.string.text_message_register_success))
             findNavController().popBackStack()
         }
 
@@ -101,14 +94,12 @@ class RegisterFragment : Fragment() {
     private fun isEmptyCylinderCapacity() =
         binding.textInputEditTextCylinderCapacity.text.toString().isEmpty()
 
-    private fun parseException(exception: Exception) {
-        val message = when (exception) {
-            is CapacityParkingExceededException -> exception.message
-            is ExistSameVehicleException -> exception.message
-            is InvalidPatternPlateException -> exception.message
-            else -> getString(R.string.text_message_general_exception)
-        }
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+    private fun showMessage(message: String?) {
+        Toast.makeText(
+            requireContext(),
+            message ?: getString(R.string.text_message_general_exception),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onDestroyView() {

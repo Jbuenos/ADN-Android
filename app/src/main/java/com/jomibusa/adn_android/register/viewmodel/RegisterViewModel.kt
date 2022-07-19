@@ -8,6 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.jomibusa.adn_android.payment.model.VehicleType
 import com.jomibusa.adn_android.register.di.IoDispatcher
 import com.jomibusa.adn_android.register.model.RegisterProvider
+import com.jomibusa.domain.register.exception.CapacityParkingExceededException
+import com.jomibusa.domain.register.exception.ExistSameVehicleException
+import com.jomibusa.domain.vehicle.exception.InvalidPatternPlateException
 import com.jomibusa.domain.vehicle.model.Car
 import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Plate
@@ -26,8 +29,8 @@ class RegisterViewModel @Inject constructor(
     private var _getResultNewRegister = MutableLiveData<Boolean>()
     val getResultNewRegister: LiveData<Boolean> get() = _getResultNewRegister
 
-    private var _getError = MutableLiveData<Exception>()
-    val getError: LiveData<Exception> get() = _getError
+    private var _getError = MutableLiveData<String?>()
+    val getError: LiveData<String?> get() = _getError
 
     fun insertNewRegister(vehicleType: VehicleType, plate: String, cylinderCapacity: Int = 0) {
         viewModelScope.launch(dispatcher) {
@@ -40,8 +43,17 @@ class RegisterViewModel @Inject constructor(
                 _getResultNewRegister.postValue(true)
             } catch (e: Exception) {
                 Log.e("TEST_ERROR", "Error: ${e.message}")
-                _getError.postValue(e)
+                _getError.postValue(validateTypeException(e))
             }
+        }
+    }
+
+    private fun validateTypeException(exception: Exception): String? {
+        return when (exception) {
+            is CapacityParkingExceededException -> exception.message
+            is ExistSameVehicleException -> exception.message
+            is InvalidPatternPlateException -> exception.message
+            else -> null
         }
     }
 
