@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jomibusa.adn_android">
 
-    <!--<application>
+    <application>
         <activity
             android:name=".HiltTestActivity"
             android:exported="false" />
-    </application>-->
+    </application>
 
 </manifest>

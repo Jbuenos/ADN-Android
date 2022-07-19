@@ -1,4 +1,3 @@
-/*
 package com.jomibusa.adn_android.payment.view
 
 import androidx.navigation.NavController
@@ -61,4 +60,4 @@ class PaymentFragmentTest {
         onView(withId(R.id.material_button_calculate_payment)).perform(click())
     }
 
-}*/
+}

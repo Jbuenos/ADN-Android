@@ -1,4 +1,3 @@
-/*
 package com.jomibusa.adn_android.menuparking.view
 
 import androidx.fragment.app.testing.FragmentScenario
@@ -67,4 +66,4 @@ class MenuParkingFragmentTest {
         verify(mockNavController).navigate(MenuParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
     }
 
-}*/
+}
