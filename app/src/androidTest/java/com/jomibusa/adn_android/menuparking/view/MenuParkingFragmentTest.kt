@@ -4,20 +4,13 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jomibusa.adn_android.R
+import com.jomibusa.adn_android.shared.Page
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
 
 @RunWith(AndroidJUnit4::class)
 class MenuParkingFragmentTest {
@@ -34,36 +27,26 @@ class MenuParkingFragmentTest {
 
     @Test
     fun goToRegisterFragment_success() {
-        menuParking.onFragment { fragment ->
-            mockNavController.setGraph(R.navigation.core_nav_graph)
-            Navigation.setViewNavController(fragment.requireView(), mockNavController)
-        }
-        onView(withId(R.id.material_button_register)).check(
-            matches(
-                withEffectiveVisibility(
-                    ViewMatchers.Visibility.VISIBLE
-                )
-            )
-        )
-        onView(withId(R.id.material_button_register)).perform(click())
-        verify(mockNavController).navigate(MenuParkingFragmentDirections.actionParkingFragmentToRegisterFragment())
+        Page.on<MenuParkingPage>()
+            .onFragment(menuParking, mockNavController)
+            .on<MenuParkingPage>()
+            .isVisible()
+            .on<MenuParkingPage>()
+            .onClickRegister()
+            .on<MenuParkingPage>()
+            .goToRegisterFragment(mockNavController)
     }
 
     @Test
     fun goToPaymentFragment_success() {
-        menuParking.onFragment { fragment ->
-            mockNavController.setGraph(R.navigation.core_nav_graph)
-            Navigation.setViewNavController(fragment.requireView(), mockNavController)
-        }
-        onView(withId(R.id.material_button_payment)).check(
-            matches(
-                withEffectiveVisibility(
-                    ViewMatchers.Visibility.VISIBLE
-                )
-            )
-        )
-        onView(withId(R.id.material_button_payment)).perform(click())
-        verify(mockNavController).navigate(MenuParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
+        Page.on<MenuParkingPage>()
+            .onFragment(menuParking, mockNavController)
+            .on<MenuParkingPage>()
+            .isVisible()
+            .on<MenuParkingPage>()
+            .onClickPayment()
+            .on<MenuParkingPage>()
+            .goToPaymentFragment(mockNavController)
     }
 
 }

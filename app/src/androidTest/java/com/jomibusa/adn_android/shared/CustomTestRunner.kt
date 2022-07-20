@@ -1,4 +1,4 @@
-package com.jomibusa.adn_android
+package com.jomibusa.adn_android.shared
 
 import android.app.Application
 import android.content.Context

@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "com.jomibusa.adn_android.CustomTestRunner"
+        testInstrumentationRunner "com.jomibusa.adn_android.shared.CustomTestRunner"
     }
 
     buildTypes {
@@ -93,6 +93,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.0"
 
 }
 
