@@ -23,29 +23,29 @@ class MenuParkingFragmentTest {
         menuParking = launchFragmentInContainer(themeResId = R.style.Theme_ADNAndroid)
         menuParking.moveToState(newState = Lifecycle.State.STARTED)
         mockNavController = mock(NavController::class.java)
+        Page.on<RegisterProcessPage>()
+            .onFragment(menuParking, mockNavController)
+            .on<PaymentProcessPage>()
+            .onFragment(menuParking, mockNavController)
     }
 
     @Test
     fun goToRegisterFragment_success() {
-        Page.on<MenuParkingPage>()
-            .onFragment(menuParking, mockNavController)
-            .on<MenuParkingPage>()
-            .isVisible()
-            .on<MenuParkingPage>()
+        Page.on<RegisterProcessPage>()
+            .isVisibleButtonRegister()
+            .on<RegisterProcessPage>()
             .onClickRegister()
-            .on<MenuParkingPage>()
+            .on<RegisterProcessPage>()
             .goToRegisterFragment(mockNavController)
     }
 
     @Test
     fun goToPaymentFragment_success() {
-        Page.on<MenuParkingPage>()
-            .onFragment(menuParking, mockNavController)
-            .on<MenuParkingPage>()
-            .isVisible()
-            .on<MenuParkingPage>()
+        Page.on<PaymentProcessPage>()
+            .isVisibleButtonPayment()
+            .on<PaymentProcessPage>()
             .onClickPayment()
-            .on<MenuParkingPage>()
+            .on<PaymentProcessPage>()
             .goToPaymentFragment(mockNavController)
     }
 

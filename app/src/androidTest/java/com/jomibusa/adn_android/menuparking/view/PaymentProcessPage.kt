@@ -11,7 +11,7 @@ import com.jomibusa.adn_android.R
 import com.jomibusa.adn_android.shared.Page
 import org.mockito.Mockito
 
-class MenuParkingPage : Page() {
+class PaymentProcessPage : Page() {
 
     fun onFragment(
         menuParking: FragmentScenario<MenuParkingFragment>,
@@ -28,8 +28,8 @@ class MenuParkingPage : Page() {
         return this
     }
 
-    fun isVisible(): Page {
-        Espresso.onView(ViewMatchers.withId(R.id.material_button_register)).check(
+    fun isVisibleButtonPayment(): Page {
+        Espresso.onView(ViewMatchers.withId(R.id.material_button_payment)).check(
             ViewAssertions.matches(
                 ViewMatchers.withEffectiveVisibility(
                     ViewMatchers.Visibility.VISIBLE
@@ -39,21 +39,9 @@ class MenuParkingPage : Page() {
         return this
     }
 
-    fun onClickRegister(): Page {
-        Espresso.onView(ViewMatchers.withId(R.id.material_button_register))
-            .perform(ViewActions.click())
-        return this
-    }
-
     fun onClickPayment(): Page {
         Espresso.onView(ViewMatchers.withId(R.id.material_button_payment))
             .perform(ViewActions.click())
-        return this
-    }
-
-    fun goToRegisterFragment(navController: NavController): Page {
-        Mockito.verify(navController)
-            .navigate(MenuParkingFragmentDirections.actionParkingFragmentToRegisterFragment())
         return this
     }
 
@@ -62,4 +50,5 @@ class MenuParkingPage : Page() {
             .navigate(MenuParkingFragmentDirections.actionParkingFragmentToPaymentFragment())
         return this
     }
+
 }
