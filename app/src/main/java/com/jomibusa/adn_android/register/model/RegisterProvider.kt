@@ -5,6 +5,7 @@ import com.jomibusa.domain.register.model.MotorcycleRegister
 import com.jomibusa.domain.register.service.CarRegisterService
 import com.jomibusa.domain.register.service.MotorcycleRegisterService
 import com.jomibusa.domain.vehicle.model.Car
+import com.jomibusa.domain.vehicle.model.Motorcycle
 import com.jomibusa.domain.vehicle.model.Vehicle
 import java.util.*
 import javax.inject.Inject
@@ -17,7 +18,12 @@ class RegisterProvider @Inject constructor(
     suspend fun insertNewRegister(vehicle: Vehicle) {
         when (vehicle) {
             is Car -> carRegisterService.insertNewRegister(CarRegister(vehicle, Date()))
-            else -> motorcycleRegisterService.insertNewRegister(MotorcycleRegister(vehicle, Date()))
+            is Motorcycle -> motorcycleRegisterService.insertNewRegister(
+                MotorcycleRegister(
+                    vehicle,
+                    Date()
+                )
+            )
         }
     }
 }
