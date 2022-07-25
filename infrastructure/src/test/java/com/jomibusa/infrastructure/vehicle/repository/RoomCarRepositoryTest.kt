@@ -34,9 +34,10 @@ class RoomCarRepositoryTest {
     fun getAllVehicle_success() {
         //Arrange
         val listCars = listOf(
-            Car(Plate("JRP304")), Car(Plate("BTI371")), Car(
-                Plate("WYZ444")
-            ), Car(Plate("HMT251"))
+            Car(Plate("JRP304")),
+            Car(Plate("BTI371")),
+            Car(Plate("WYZ444")),
+            Car(Plate("HMT251"))
         )
         val roomCarRepository = mock(RoomCarRepository::class.java)
         runTest {
